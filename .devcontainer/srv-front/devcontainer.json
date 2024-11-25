@@ -2,7 +2,7 @@
     "name": "🔋 Front",
     "dockerComposeFile": ["../../docker-compose.yml"],
     "service": "nuxt",
-    "workspaceFolder": "/workspace/front",
+    "workspaceFolder": "/workspaces/front",
     //"onCreateCommand": "npm install",
     "shutdownAction": "none"
 }

@@ -2,9 +2,9 @@
     "name": "🔋 Back",
     "dockerComposeFile": ["../../docker-compose.yml"],
     "service": "fastapi",
-    "workspaceFolder": "/workspace/back",
+    "workspaceFolder": "/workspaces/back",
     "containerEnv": {
-        "PYTHONPATH": "/workspace/back",
+        "PYTHONPATH": "/workspaces/back",
         "PYTHONUNBUFFERED": "1",
         "PYTHONBREAKPOINT": "ipdb.set_trace"
     },
