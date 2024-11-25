@@ -1,7 +1,7 @@
 {
     "name": "🔋 Back",
     "dockerComposeFile": [
-        "../../docker-compose.local.yml"
+        "../docker-compose.local.yml"
     ],
     "service": "fastapi",
     "workspaceFolder": "/workspaces/fast-batteries/back",

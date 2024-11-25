@@ -1,7 +1,7 @@
 {
     "name": "🔋 Front",
     "dockerComposeFile": [
-        "../../docker-compose.local.yml"
+        "../docker-compose.local.yml"
     ],
     "service": "nuxt",
     "workspaceFolder": "/workspaces/fast-batteries/front",
