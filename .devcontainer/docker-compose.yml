@@ -4,8 +4,6 @@ services:
   # Nuxt Service: Frontend Service
   nuxt:
     image: node:20.18-bookworm
-    volumes:
-      - .:/workspace:cached
     command: sleep infinity
     ports:
       - "3000:3000"
@@ -13,8 +11,6 @@ services:
   # FastAPI Web Backend Service
   fastapi:
     image: python:3.12.7-bookworm
-    volumes:
-      - .:/workspace:cached
     command: sleep infinity
     ports:
       - "8000:8000"
