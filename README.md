@@ -44,15 +44,15 @@ The philosophy slightly differs from other templates, as it avoids relying on sm
   - CI with [Github actions](https://github.com/features/actions).
 
 ### 🧪 Tests
-  - All batteries are tested with [Pytest](https://pytest.org/)
+  - Batteries are tested with [Pytest](https://pytest.org/) (150+ tests)
   - Factories with [factory_boy](https://factoryboy.readthedocs.io/en/stable/) to generate test data or initial local data (fixtures)
   - E2E test example with [Playwright](https://playwright.dev/)
 
 ### 🎨 Front-end
-  - Front-end made with [Nuxt](https://nuxt.com/) (Vue.js) and [NuxtUI](https://ui.nuxt.com/) (uses [Tailwind CSS](https://tailwindcss.com/))
+  - Demos: CRUD (including pagination/ordering/filtering) + login/signup workflow
+  - Made with [Nuxt](https://nuxt.com/) (Vue.js) and [NuxtUI](https://ui.nuxt.com/) (uses [Tailwind CSS](https://tailwindcss.com/))
   - Dark mode support
   - Typescript interfaces and schemas auto-generation with [OpenAPI TypeScript](https://openapi-ts.dev/)
-  - Tight error integration ()
 
 ## Demo
 
@@ -60,17 +60,17 @@ You can try it [here](https://fast-batteries.ovh). E-mails will be sent for real
 
 ## Documentation
 
-See the [`/doc` folder](https://fixme) containing diverse information. 
+See the [`/doc` folder](./doc/) containing diverse information. 
 
 ## Contributions
 
-Issues and PRs are very welcome, as I'll try to improve this boilerplate over time. Here is how you can help:
-- make the current batteries more solid (mistakes, cleaner ways to do, more use cases, more unit tests, ...)
-- help me build a new battery (cf. roadmap) from scratch.
+I really need help to make this template better over time. Issues and PRs are very welcome. Here is how you can help:
+  - make the current batteries more solid (mistakes, cleaner ways to do, more use cases, more unit tests, ...)
+  - help me build a new battery (cf. roadmap) from scratch.
 
 ## Roadmap
 
-You can see it [here](http://fixme)
+You can see it [here](https://github.com/users/ddahan/projects/1)
 
 ## FAQ / Philosophy
 
