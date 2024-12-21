@@ -65,12 +65,12 @@ See the [`/doc` folder](./doc/) containing diverse information.
 ## Contributions
 
 I really need help to make this template better over time. Issues and PRs are very welcome. Here is how you can help:
-  - make the current batteries more solid (mistakes, cleaner ways to do, more use cases, more unit tests, ...)
-  - help me build a new battery (cf. roadmap) from scratch.
+  - make the current batteries more solid (mistakes, betters ways to do, more use cases, more tests, ...)
+  - help me build a new battery (cf. [roadmap](https://github.com/users/ddahan/projects/1)) from scratch.
 
-## Roadmap
+## Public Roadmap
 
-You can see it [here](https://github.com/users/ddahan/projects/1)
+You can see it [here](https://github.com/users/ddahan/projects/1).
 
 ## FAQ / Philosophy
 
@@ -97,7 +97,7 @@ Batteries are often tied together because it just makes sense when not dealing w
 
 > **Why choose Nuxt instead of Vue.js?**
 
-Nuxt is not used here for its SSR abilities. However, it helps a lot to make the front-end stack *all-batteries-included*, especially thanks to Nuxt UI package. There are actually no additional packages. As the purpose of this template is not a front-end showcase, this should make sense here.
+Nuxt is not used here for its SSR abilities. However, Nuxt helps a lot to make the front-end stack *all-batteries-included*, especially thanks to Nuxt UI package. As the purpose of this template is not a front-end showcase, this should make sense here.
 
 ## Screenshots
 
