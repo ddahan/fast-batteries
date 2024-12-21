@@ -89,6 +89,9 @@ jobs:
           python -m pip install --no-cache-dir --upgrade pip
           pip install --no-cache-dir --upgrade -r requirements.txt
 
+      - name: Debug Networking
+        run: ping -c 4 pg
+
       - name: Run tests
         working-directory: back
         run: pytest
