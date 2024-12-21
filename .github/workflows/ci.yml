@@ -13,12 +13,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     environment: fast-batteries-CI
-    env:
-      # this will take the entire vars context configured in the repository > environments
-      # setting and convert it to JSON so we can automatically assign all the values to the
-      # runner's environment.
-      # https://stackoverflow.com/a/77970445/2255491
-      VARS_CONTEXT: ${{ toJson(vars) }}
 
     services:
       pg:
@@ -35,6 +29,41 @@ jobs:
           --health-timeout=5s
           --health-retries=5
 
+    env:
+      # Main
+      FAPI_BACK_DOMAIN: ${{ vars.FAPI_BACK_DOMAIN }}
+      FAPI_FRONT_DOMAIN: ${{ vars.FAPI_FRONT_DOMAIN }}
+      FAPI_ENVIRONMENT: ${{ vars.FAPI_ENVIRONMENT }}
+
+      # Logging
+      FAPI_USE_LOGFIRE: ${{ vars.FAPI_USE_LOGFIRE }}
+
+      # Social Auth
+      FAPI_LINKEDIN_CLIENT_ID: ${{ vars.FAPI_LINKEDIN_CLIENT_ID }}
+      FAPI_LINKEDIN_CLIENT_SECRET: ${{ vars.FAPI_LINKEDIN_CLIENT_SECRET }}
+
+      # Security
+      FAPI_DEBUG: ${{ vars.FAPI_DEBUG }}
+      FAPI_PROTOCOL: ${{ vars.FAPI_PROTOCOL }}
+      FAPI_SECRET_KEY: ${{ vars.FAPI_SECRET_KEY }}
+      FAPI_CORS_ALLOW_ORIGIN: ${{ vars.FAPI_CORS_ALLOW_ORIGIN }}
+
+      # Email
+      FAPI_EMAIL_BACKEND: ${{ vars.FAPI_EMAIL_BACKEND }}
+
+      # Database
+      FAPI_DATABASE_ALLOW_RESET: ${{ vars.FAPI_DATABASE_ALLOW_RESET }}
+      FAPI_DATABASE_ECHO: ${{ vars.FAPI_DATABASE_ECHO }}
+      FAPI_POSTGRES_SERVER: ${{ vars.FAPI_POSTGRES_SERVER }}
+      FAPI_POSTGRES_USER: ${{ vars.FAPI_POSTGRES_USER }}
+      FAPI_POSTGRES_PASSWORD: ${{ vars.FAPI_POSTGRES_PASSWORD }}
+      FAPI_POSTGRES_DB: ${{ vars.FAPI_POSTGRES_DB }}
+      FAPI_POSTGRES_ADMIN_USER: ${{ vars.FAPI_POSTGRES_ADMIN_USER }}
+      FAPI_POSTGRES_ADMIN_PASSWORD: ${{ vars.FAPI_POSTGRES_ADMIN_PASSWORD }}
+
+      # Redis
+      FAPI_REDIS_SERVER: ${{ vars.FAPI_REDIS_SERVER }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -46,14 +75,9 @@ jobs:
 
       - name: Export GitHub Vars to ENV
         run: |
-          # Pipe the JSON string into jq
-          echo "$VARS_CONTEXT" | 
-          # Convert JSON object into an array of key-value pairs
-          jq -r 'to_entries | 
-          # Map over each key-value pair
-          .[] | 
-          # Format each pair as "KEY=VALUE" and append it all to the environment file
-          "\(.key)=\(.value)"' >> $GITHUB_ENV
+          for var in $(env | grep '^VAR_' | sed 's/=.*$//'); do
+            echo "export $var=${!var}" >> $GITHUB_ENV;
+          done
       - name: Check env
       run: printenv
 
