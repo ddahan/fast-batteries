@@ -1,0 +1,10 @@
+<mj-button
+  href="{{ button_primary_url }}"
+  font-size="16px"
+  background-color="#0fb982"
+  color="#ffffff"
+  border-radius="5px"
+  padding="20px 0"
+>
+  {{ button_primary_text }}
+</mj-button>

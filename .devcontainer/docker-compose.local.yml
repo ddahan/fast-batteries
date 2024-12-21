@@ -1,0 +1,60 @@
+services:
+  ########################################################################################
+  # Nuxt + FastAPI together in a single service
+  # (because VS Code does not support single workspace for multiple containers)
+  ########################################################################################
+  app:
+    image: "python:3.13.1-bookworm" # Node is installed wih a container "feature" then
+    environment:
+      - PYTHONPATH=/workspaces/cookbook/back
+      - PYTHONUNBUFFERED=1
+      - PYTHONBREAKPOINT=ipdb.set_trace
+    volumes:
+      - ..:/workspaces:delegated # Performance optimization option for the volume.
+    command: sleep infinity # Things don't shut down after the process ends.
+    ports:
+      - "3000:3000" # Nuxt
+      - "8000:8000" # FastAPI
+
+  ########################################################################################
+  # PostgreSQL service
+  ########################################################################################
+  pg:
+    image: "postgres:17-bookworm"
+    environment:
+      - POSTGRES_DB=localdb
+      - POSTGRES_USER=localuser
+      - POSTGRES_PASSWORD=localpassword
+    restart: unless-stopped
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+  ########################################################################################
+  # pgAdmin service
+  ########################################################################################
+  pgadmin:
+    image: "dpage/pgadmin4:8.13"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=localuser@fast-batteries.ovh
+      - PGADMIN_DEFAULT_PASSWORD=localpassword
+    restart: unless-stopped
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - pg
+    ports:
+      - "8180:80"
+
+  ########################################################################################
+  # Redis service
+  ########################################################################################
+  redis:
+    image: "redis:7-bookworm"
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+
+volumes:
+  pg-data:
+  pgadmin-data:
+  redis-data:

@@ -1,8 +1,0 @@
-{
-    "name": "🔋 Front",
-    "dockerComposeFile": "../docker-compose.yml",
-    "service": "nuxt",
-    "workspaceFolder": "/workspaces/fast-batteries/front",
-    //"onCreateCommand": "npm install",
-    "shutdownAction": "none"
-}

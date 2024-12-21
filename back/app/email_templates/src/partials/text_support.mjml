@@ -1,0 +1,9 @@
+<mj-text font-size="16px" color="#333333" line-height="1.6">
+  If you have any questions or need further assistance, feel free to
+  <a
+    href="mailto:{{ support_email }}"
+    style="color: #0fb982; text-decoration: none"
+  >
+    contact our support team</a
+  >.
+</mj-text>

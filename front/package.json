@@ -1,0 +1,22 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --no-fork",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "schemas": "openapi-typescript http://localhost:8000/openapi.json --output '/workspaces/cookbook/front/types/schemas.d.ts' --alphabetize --default-non-nullable"
+  },
+  "dependencies": {
+    "@iconify-json/mdi": "^1.2.0",
+    "@iconify-json/ph": "^1.2.0",
+    "@nuxt/ui": "^2.18.6",
+    "nuxt": "^3.13.2",
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "v-calendar": "^3.1.2",
+    "zod": "^3.23.8"
+  }
+}

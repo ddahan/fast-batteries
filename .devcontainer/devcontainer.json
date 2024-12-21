@@ -1,0 +1,40 @@
+{
+    "name": "🔋 Fast Batteries",
+    "dockerComposeFile": "docker-compose.local.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "onCreateCommand": "cd back && poetry config virtualenvs.create false && poetry install && cd ../front/ && npm install",
+    "features": {
+        "ghcr.io/ddahan/feature-starter/poetry:latest": {
+            "version": "1.8.4"
+        },
+        "ghcr.io/ddahan/feature-starter/custom_bashrc:latest": {},
+        "ghcr.io/devcontainers/features/node": {
+            "version": "lts"
+        },
+        "ghcr.io/ddahan/feature-starter/d2": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // front 
+                "esbenp.prettier-vscode",
+                "bradlc.vscode-tailwindcss",
+                "Vue.volar",
+                "yoavbls.pretty-ts-errors",
+                "antfu.iconify",
+                // back
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "charliermarsh.ruff",
+                // misc
+                "ms-azuretools.vscode-docker",
+                "yzhang.markdown-all-in-one",
+                "tamasfe.even-better-toml",
+                "danielknights.vscode-mjml",
+                "terrastruct.d2"
+            ],
+            "settings": {}
+        }
+    }
+}

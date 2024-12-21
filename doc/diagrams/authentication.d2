@@ -1,0 +1,55 @@
+title: |md
+  #  Authentication Workflow
+| {near: top-center}
+
+Classic Auth + Social Auth: {
+  📝 sign up: {shape: page}
+  📝 sign up.submit -> 📝 login: ✅
+  📝 sign up.🔗 already have an account? -> 📝 login
+  📝 sign up.🔗 continue with linkedin -> 📝 connect with linkedin
+
+  📝 login: {shape: page}
+  📝 login.submit -> 📝 home: ✅ New Access Token created and stored + User profile fetch
+  📝 login.🔗 password forgotten? -> 📝 send reset password link
+  📝 login.🖥️ already logged in? -> 📝 already logged in
+  📝 login.🔗 continue with linkedin -> 📝 connect with linkedin
+
+  📝 connect with linkedin: {shape: page}
+  📝 connect with linkedin.submit -> 📝 home: ✅ New Access Token created and stored + User profile fetch
+
+  📝 home: {shape: page}
+  📝 home.🔗 login -> 📝 login
+  📝 home.🔗 sign up -> 📝 sign up
+  📝 home.🔗 logout -> 🖥️ logout
+
+  📝 already logged in: {shape: page}
+  📝 already logged in.🔗 keep me logged -> 📝 home
+  📝 already logged in.🔗 log me out -> 🖥️ logout
+
+  📝 send reset password link: {shape: page}
+  📝 send reset password link.submit -> 📝 sent mail confirmation: ✅ 📩
+
+  📝 sent mail confirmation: {shape: page}
+
+  📝 reset password: {shape: page}
+  📝 reset password.submit -> 📝 login: ✅
+
+  🖥️ logout: {shape: circle}
+  🖥️ logout -> 📝 login: ✅ Access Token deleted (front)
+
+  🏁 app mount: {shape: circle}
+  🏁 app mount -> 🔌 rehydrate user profile
+  🔌 rehydrate user profile: {shape: circle}
+  🔌 rehydrate user profile -> 🖥️ logout: ❌ Invalid Access Token
+}
+
+Legend: {
+  near: bottom-center
+  🏁 Workflow start
+  📝 Page
+  🖥️ Logic
+  🔌 Plugin run at app start
+  🔗 Button / Link
+  ✅ Endpoint succesful
+  📩 Mail sent
+}

@@ -1,0 +1,39 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558 
+    // See https://code.visualstudio.com/docs/editor/tasks-appendix
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Celery",
+            "type": "shell",
+            "command": "celery --app app.confcelery.celery_app worker --beat --uid=nobody --gid=nogroup --loglevel INFO",
+            "isBackground": true,
+            "icon": {
+                "id": "tasklist",
+                "color": "terminal.ansiGreen"
+            },
+            "presentation": {
+                "reveal": "never",
+                "panel": "new",
+                "showReuseMessage": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "View Authentication D2 schema",
+            "type": "shell",
+            "command": "d2 doc/diagrams/authentication.d2 /tmp/d2/authentication.svg --watch",
+            "isBackground": true,
+            "icon": {
+                "id": "lock",
+                "color": "terminal.ansiBlue"
+            },
+            "presentation": {
+                "reveal": "never",
+                "panel": "new",
+                "showReuseMessage": false
+            },
+            "problemMatcher": []
+        },
+    ]
+}

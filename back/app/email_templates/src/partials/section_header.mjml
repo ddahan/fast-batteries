@@ -1,0 +1,24 @@
+<mj-section padding="0" background-color="#f6f6f6">
+  <mj-column>
+    <mj-spacer height="40px" />
+  </mj-column>
+</mj-section>
+
+<mj-section background-color="#ffffff" padding="20px">
+  <mj-column>
+    <mj-image
+      src="{{ main_logo_url }}"
+      alt="fast batteries logo"
+      width="64px"
+    />
+    <mj-text
+      font-size="24px"
+      color="#0fb982"
+      align="center"
+      font-weight="bold"
+      padding-bottom="20px"
+    >
+      {{ header_title }}
+    </mj-text>
+  </mj-column>
+</mj-section>

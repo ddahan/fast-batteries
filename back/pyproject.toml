@@ -1,0 +1,142 @@
+[tool]
+
+[tool.poetry]
+name = "Batteries"
+package-mode = false
+authors = ["David Dahan <david.dahan3@gmail.com>"]
+
+
+[tool.pytest.ini_options]
+addopts = "--color=yes"
+# Overrides local settings for tests.
+# Be careful, you would break current env when running tests, if this is not set.
+env = [
+    "FAPI_ENVIRONMENT=test",
+    "FAPI_DEBUG=False",
+    "FAPI_USE_LOGFIRE=False",
+    "FAPI_POSTGRES_USER=testuser",
+    "FAPI_POSTGRES_PASSWORD=testpwd",
+    "FAPI_POSTGRES_DB=testdb",
+]
+
+[tool.ruff]
+line-length = 90
+target-version = "py313"
+extend-exclude = ["__pycache__"]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "ARG001", # unused arguments in functions
+]
+ignore = [
+    "E501", #https://docs.astral.sh/ruff/rules/line-too-long/
+    "I001", # https://docs.astral.sh/ruff/rules/unsorted-imports/
+    "C408", # https://docs.astral.sh/ruff/rules/unnecessary-collection-call/
+    "E731", # https://docs.astral.sh/ruff/rules/lambda-assignment/
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+    "F401", # unused import
+    "F403", # star imports
+]
+"test_*.py" = [
+    "ARG001", # fixtures can be unused args passed to test functions
+]
+
+[tool.ruff.lint.pyupgrade]
+# Preserve types, even if a file imports `from __future__ import annotations`.
+keep-runtime-typing = true
+
+[tool.ruff.format]
+docstring-code-format = true
+
+
+[tool.poetry.dependencies]
+##########################################################################################
+# Main tools
+##########################################################################################
+# https://github.com/python/cpython
+python = "3.13.1"
+
+# https://github.com/tiangolo/fastapi
+fastapi = { version = "*", extras = ["standard"] }
+
+# https://github.com/pydantic/pydantic
+pydantic = ">2.0"
+
+# https://github.com/pydantic/pydantic-settings
+pydantic-settings = "*"
+
+# https://github.com/pydantic/pydantic-extra-types
+pydantic-extra-types = "*"
+
+# https://github.com/daviddrysdale/python-phonenumbers
+phonenumbers = "*"
+
+# https://github.com/gotcha/ipdb
+ipdb = "*"
+
+# https://github.com/psycopg/psycopg
+psycopg = { extras = ["binary"], version = "*" }
+
+# https://github.com/jpadilla/pyjwt
+pyjwt = "*"
+
+# https://github.com/pytest-dev/pytest
+pytest = "*"
+
+# https://github.com/MobileDynasty/pytest-env
+pytest-env = "*"
+
+# https://github.com/Textualize/rich
+rich = "*"
+
+# https://github.com/pyca/bcrypt
+bcrypt = "*"
+
+# https://github.com/sqlalchemy/alembic
+alembic = "*"
+
+# https://github.com/FactoryBoy/factory_boy
+factory-boy = "*"
+
+# https://github.com/pallets/jinja
+jinja2 = "*"
+
+# https://github.com/labrador-kennel/emails
+emails = "*"
+
+# https://github.com/logfire-sh/python-sdk
+logfire = { extras = ["fastapi", "sqlalchemy", "celery"], version = "*" }
+
+# https://github.com/Delgan/loguru
+loguru = "*"
+
+# https://github.com/benoitc/gunicorn
+gunicorn = "*"
+
+# https://github.com/encode/httpx
+httpx = "*"
+
+# https://github.com/celery/celery
+celery = { extras = ["redis", "beat"], version = "*" }
+
+# https://github.com/spulec/freezegun
+freezegun = "*"
+
+# https://github.com/astral-sh/ruff
+# used to 1) have easy access to 'ruff' command for other tools
+#         2) have access to the latest version compared to bundled binary from extension
+ruff = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

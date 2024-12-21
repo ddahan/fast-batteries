@@ -1,0 +1,149 @@
+x-common: &common
+  env_file:
+    - .env
+  networks:
+    - dokploy-network # Connect to the shared network 'dokploy-network'
+
+services:
+  ########################################################################################
+  # Nuxt service
+  ########################################################################################
+  nuxt:
+    build:
+      context: ./front # Build context set to 'front' folder
+      dockerfile: Dockerfile # Use the Dockerfile located in the 'front' directory
+      args: # required at image build time (not runtime)
+        NUXT_BACK_HOST_URL: ${NUXT_BACK_HOST_URL}
+    command: ["node", ".output/server/index.mjs"]
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/health-check"] # Check endpoint
+      interval: 10s # Check every 10 seconds
+      timeout: 10s # Timeout after 10 seconds
+      retries: 5 # Retry up to 5 times before marking as 'unhealthy'
+    <<: *common
+
+  ########################################################################################
+  # FastAPI service
+  ########################################################################################
+  fastapi:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    command: [
+        "gunicorn",
+        "app.main:app",
+        "-w",
+        "4", # 4 workers
+        "-k",
+        "uvicorn.workers.UvicornWorker",
+        "-b",
+        "0.0.0.0:8000",
+      ]
+    restart: unless-stopped # Restart unless explicitly stopped or system restarted
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health-check"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+      pg:
+        condition: service_healthy # Ensure PostgreSQL is healthy before starting
+        restart: true # Restart FastAPI if the 'pg' service restarts
+      # fastapi-prestart:
+      #   condition: service_completed_successfully
+    <<: *common
+
+  ########################################################################################
+  # FastAPI prestart service (applying migrations)
+  # Currently deactivated because lots of reset db prevents this to work normally
+  ########################################################################################
+  # fastapi-prestart:
+  #   build:
+  #     context: ./back
+  #     dockerfile: Dockerfile
+  #   command: ["alembic", "upgrade", "head"] # Run database migrations using Alembic
+  #   restart: no # Do not restart; runs only once at startup
+  #   depends_on:
+  #     pg:
+  #       condition: service_healthy
+  #       restart: true
+  #   volumes:
+  #     - ./back/app:/code/app # Mount 'back/app' directory to access database migration scripts
+  #   <<: *common
+
+  ########################################################################################
+  # Celery worker service
+  ########################################################################################
+  celery:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    command:
+      [
+        "celery",
+        "--app",
+        "app.confcelery.celery_app",
+        "worker",
+        "--beat",
+        "--loglevel=info",
+      ]
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - fastapi
+    volumes:
+      - ./back/app:/code/app # Mount the app directory for accessing tasks
+    <<: *common
+
+  ########################################################################################
+  # PostgreSQL service
+  ########################################################################################
+  pg:
+    image: "postgres:17-bookworm"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    <<: *common
+
+  ########################################################################################
+  # pgAdmin service
+  ########################################################################################
+  pgadmin:
+    image: "dpage/pgadmin4:8.13"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    <<: *common
+
+  ########################################################################################
+  # Redis service
+  ########################################################################################
+  redis:
+    image: "redis:7-bookworm"
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    <<: *common
+
+networks:
+  dokploy-network:
+    external: true # Use an external network to allow inter-service communication
+
+volumes:
+  pg-data:
+  pgadmin-data:
+  redis-data:

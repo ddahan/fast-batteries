@@ -1,0 +1,18 @@
+<mj-section background-color="#f6f6f6" padding="20px 0">
+  <mj-column>
+    <mj-text font-size="14px" color="#777777" align="center">
+      &copy; 2024 Fast Batteries. All rights reserved.
+    </mj-text>
+    <mj-text font-size="14px" color="#777777" align="center">
+      <a href="{{ privacy_url }}" style="color: #0fb982; text-decoration: none"
+        >Privacy Policy</a
+      >
+      |
+      <a
+        href="{{ visit_our_website_url}}"
+        style="color: #0fb982; text-decoration: none"
+        >Visit our website</a
+      >
+    </mj-text>
+  </mj-column>
+</mj-section>

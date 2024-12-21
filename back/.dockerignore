@@ -1,0 +1,22 @@
+# Python bytecode and caches
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+
+# Environment and configuration files
+.env
+
+# Virtual environments (unused here)
+venv/
+
+# Logs
+*.log
+
+# Git and version control
+.git
+.gitignore
+
+# Other unnecessary files
+Dockerfile
+README.md

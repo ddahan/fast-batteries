@@ -1,0 +1,183 @@
+{
+    //*********************************************************************
+    // general
+    //*********************************************************************
+    "files.insertFinalNewline": true,
+    "files.exclude": {
+        // back
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/.ruff_cache": true,
+        // front
+        "**/node_modules": true,
+    },
+    "editor.rulers": [
+        90
+    ],
+    "editor.wordWrapColumn": 90,
+    "editor.detectIndentation": false,
+    "editor.indentSize": "tabSize",
+    "editor.formatOnSave": true,
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.fixAll": "never",
+    },
+    "workbench.editor.labelFormat": "medium",
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#039384",
+        "titleBar.activeForeground": "#ffffff"
+    },
+    //*********************************************************************
+    // python
+    //*********************************************************************
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.tabSize": 4,
+        "editor.rulers": [
+            90
+        ],
+    },
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    // Pylance
+    "python.languageServer": "Pylance", // Intellisense, AutoComplete, and 2nd linter with type checker
+    "python.analysis.typeCheckingMode": "strict",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportUnusedImport": "warning",
+        "reportUnusedVariable": "warning",
+        "reportUndefinedVariable": "error",
+        "reportUnknownMemberType": "information",
+        "reportUnknownVariableType": "information",
+        "reportTypedDictNotRequiredAccess": "warning"
+    },
+    "python.analysis.indexing": true,
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.packageIndexDepths": [
+        {
+            "name": "", // for all packages
+            "depth": 2, // should be enough for most packages. Has a performance cost
+            "includeAllSymbols": true // not sure
+        },
+    ],
+    "python.analysis.importFormat": "absolute",
+    // Tests
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "back"
+    ],
+    //*********************************************************************
+    // front
+    //*********************************************************************
+    "[vue][javascript][typescript][json][mjml][yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 2,
+        "editor.rulers": [
+            100
+        ],
+    },
+    "[toml]": {
+        "editor.defaultFormatter": "tamasfe.even-better-toml"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "css.validate": false,
+    "tailwindCSS.validate": true,
+    "tailwindCSS.emmetCompletions": true,
+    "tailwindCSS.classAttributes": [
+        "class",
+        "className",
+        "ngClass",
+        "ui"
+    ],
+    // https://ui.nuxtlabs.com/getting-started/installation#intellisense
+    "tailwindCSS.experimental.classRegex": [
+        [
+            "ui:\\s*{([^)]*)\\s*}",
+            "[\"'`]([^\"'`]*).*?[\"'`]"
+        ],
+        [
+            "/\\*ui\\*/\\s*{([^;]*)}",
+            ":\\s*[\"'`]([^\"'`]*).*?[\"'`]"
+        ]
+    ],
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    //*********************************************************************
+    // typescript
+    //*********************************************************************
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    //*********************************************************************
+    // VSCODE icons
+    //*********************************************************************
+    "vsicons.associations.folders": [
+        {
+            "icon": "python",
+            "extensions": [
+                "back"
+            ],
+            "format": "svg",
+            "overrides": "new"
+        },
+        {
+            "icon": "nuxt",
+            "extensions": [
+                "front"
+            ],
+            "format": "svg",
+            "overrides": "new"
+        },
+        {
+            "icon": "db",
+            "extensions": [
+                "migrations"
+            ],
+            "format": "svg",
+            "overrides": "new"
+        },
+        {
+            "icon": "template",
+            "extensions": [
+                "factories"
+            ],
+            "format": "svg",
+            "overrides": "new"
+        },
+        {
+            "icon": "mjml",
+            "extensions": [
+                "email_templates"
+            ],
+            "format": "svg",
+            "overrides": "new"
+        },
+        {
+            "icon": "component",
+            "extensions": [
+                "core"
+            ],
+            "format": "svg",
+            "overrides": "new"
+        },
+        {
+            "icon": "temp",
+            "extensions": [
+                "tasks"
+            ],
+            "format": "svg",
+            "overrides": "new"
+        },
+        {
+            "icon": "library",
+            "extensions": [
+                "schemas"
+            ],
+            "format": "svg",
+            "overrides": "new"
+        },
+    ]
+}
