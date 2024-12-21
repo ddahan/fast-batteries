@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - actions
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      pg:
+        image: postgres:17-bookworm
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: ciuser
+          POSTGRES_PASSWORD: cipassword
+          POSTGRES_DB: cidb
+        options: >-
+          --health-cmd="pg_isready -U ciuser -d cidb"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      # Main
+      FAPI_ENVIRONMENT: local
+      FAPI_FRONT_DOMAIN: localhost:3000
+      FAPI_BACK_DOMAIN: localhost:8000
+
+      # Logging
+      FAPI_USE_LOGFIRE: false
+
+      # Security
+      FAPI_DEBUG: false
+      FAPI_PROTOCOL: http
+      FAPI_SECRET_KEY: somekey
+      FAPI_CORS_ALLOW_ORIGIN: '["*"]'
+
+      # Email
+      FAPI_EMAIL_BACKEND: dummy
+
+      # Database
+      FAPI_DATABASE_ALLOW_RESET: false
+      FAPI_DATABASE_ECHO: false
+      FAPI_POSTGRES_SERVER: pg
+      FAPI_POSTGRES_USER: ciuser
+      FAPI_POSTGRES_PASSWORD: cipassword
+      FAPI_POSTGRES_DB: cidb
+      FAPI_POSTGRES_ADMIN_USER: ciuser
+      FAPI_POSTGRES_ADMIN_PASSWORD: cipassword
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.13.1
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.13.1
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "::add-path::${HOME}/.local/bin"
+
+      - name: Export requirements.txt
+        run: poetry export -f requirements.txt --output requirements.txt --without-hashes
+
+      - name: Install dependencies from requirements.txt
+        run: |
+          python -m pip install --no-cache-dir --upgrade pip
+          pip install --no-cache-dir --upgrade -r requirements.txt
+
+      - name: Run tests
+        run: pytest
