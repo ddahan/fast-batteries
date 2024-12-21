@@ -71,12 +71,15 @@ jobs:
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
       - name: Export requirements.txt
+        working-directory: back
         run: poetry export -f requirements.txt --output requirements.txt --without-hashes
 
       - name: Install dependencies from requirements.txt
+        working-directory: back
         run: |
           python -m pip install --no-cache-dir --upgrade pip
           pip install --no-cache-dir --upgrade -r requirements.txt
 
       - name: Run tests
+        working-directory: back
         run: pytest
