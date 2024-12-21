@@ -12,7 +12,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: python:3.13.1-bookworm # https://dev.to/duplys/cant-access-service-container-in-github-actions-heres-how-to-fix-it-10i1
+    # https://dev.to/duplys/cant-access-service-container-in-github-actions-heres-how-to-fix-it-10i1
+    container: python:3.13.1-bookworm
     environment: fast-batteries-CI
     services:
       postgres:
@@ -67,9 +68,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Debug env
-        run: printenv
 
       - name: Install Poetry and Export requirements.txt
         working-directory: back
