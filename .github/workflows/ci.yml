@@ -73,14 +73,6 @@ jobs:
         with:
           python-version: 3.13.1
 
-      - name: Export GitHub Vars to ENV
-        run: |
-          for var in $(env | grep '^VAR_' | sed 's/=.*$//'); do
-            echo "export $var=${!var}" >> $GITHUB_ENV;
-          done
-      - name: Check env
-      run: printenv
-
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
