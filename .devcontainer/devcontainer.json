@@ -29,6 +29,7 @@
                 "charliermarsh.ruff",
                 // misc
                 "ms-azuretools.vscode-docker",
+                "github.vscode-github-actions",
                 "yzhang.markdown-all-in-one",
                 "tamasfe.even-better-toml",
                 "danielknights.vscode-mjml",
