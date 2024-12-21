@@ -76,14 +76,12 @@ jobs:
       - name: Debug env
         run: printenv
 
-      - name: Install Poetry
+      - name: Install Poetry and Export requirements.txt
+        working-directory: back
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
-          echo "${HOME}/.local/bin" >> $GITHUB_PATH
-
-      - name: Export requirements.txt
-        working-directory: back
-        run: poetry export -f requirements.txt --output requirements.txt --without-hashes
+          export PATH="${HOME}/.local/bin:$PATH"
+          poetry export -f requirements.txt --output requirements.txt --without-hashes
 
       - name: Install dependencies from requirements.txt
         working-directory: back
