@@ -77,8 +77,8 @@ class Settings(BaseSettings):
     # Social Auth
     ######################################################################################
 
-    LINKEDIN_CLIENT_ID: str | None
-    LINKEDIN_CLIENT_SECRET: str | None
+    LINKEDIN_CLIENT_ID: str
+    LINKEDIN_CLIENT_SECRET: str
     LINKEDIN_AUTHORIZATION_URL: str = "https://www.linkedin.com/oauth/v2/authorization"
     LINKEDIN_TOKEN_URL: str = "https://www.linkedin.com/oauth/v2/accessToken"
     LINKEDIN_PROFILE_URL: str = "https://api.linkedin.com/v2/userinfo"
