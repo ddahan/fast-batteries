@@ -76,9 +76,6 @@ jobs:
       - name: Debug env
         run: printenv
 
-      - name: Debug Networking
-        run: ping -c 4 postgres
-
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
