@@ -28,34 +28,6 @@ jobs:
           --health-timeout=5s
           --health-retries=5
 
-    env:
-      # Main
-      FAPI_ENVIRONMENT: local
-      FAPI_FRONT_DOMAIN: localhost:3000
-      FAPI_BACK_DOMAIN: localhost:8000
-
-      # Logging
-      FAPI_USE_LOGFIRE: false
-
-      # Security
-      FAPI_DEBUG: false
-      FAPI_PROTOCOL: http
-      FAPI_SECRET_KEY: somekey
-      FAPI_CORS_ALLOW_ORIGIN: '["*"]'
-
-      # Email
-      FAPI_EMAIL_BACKEND: dummy
-
-      # Database
-      FAPI_DATABASE_ALLOW_RESET: false
-      FAPI_DATABASE_ECHO: false
-      FAPI_POSTGRES_SERVER: pg
-      FAPI_POSTGRES_USER: ciuser
-      FAPI_POSTGRES_PASSWORD: cipassword
-      FAPI_POSTGRES_DB: cidb
-      FAPI_POSTGRES_ADMIN_USER: ciuser
-      FAPI_POSTGRES_ADMIN_PASSWORD: cipassword
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
