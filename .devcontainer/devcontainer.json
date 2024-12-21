@@ -6,7 +6,7 @@
     "onCreateCommand": "cd back && poetry config virtualenvs.create false && poetry install && cd ../front/ && npm install",
     "features": {
         "ghcr.io/ddahan/feature-starter/poetry:latest": {
-            "version": "1.8.4"
+            "version": "1.8.5"
         },
         "ghcr.io/ddahan/feature-starter/custom_bashrc:latest": {},
         "ghcr.io/devcontainers/features/node": {

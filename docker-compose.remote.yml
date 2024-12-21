@@ -114,7 +114,7 @@ services:
   # pgAdmin service
   ########################################################################################
   pgadmin:
-    image: "dpage/pgadmin4:8.13"
+    image: "dpage/pgadmin4:8.14"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     healthcheck:

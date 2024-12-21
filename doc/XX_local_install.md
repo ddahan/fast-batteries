@@ -18,3 +18,8 @@
 #### Useful tasks
 
 - TS interface generation: `cd front; npm run schemas`
+
+
+#### Run Celery/beat worker
+
+- Use VS Code command `Run task` and then chose `Celery`.

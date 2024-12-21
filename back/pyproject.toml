@@ -1,10 +1,11 @@
 [tool]
 
 [tool.poetry]
-name = "Batteries"
+name = "fast-batteries"
+version = "0.1.0"
 package-mode = false
 authors = ["David Dahan <david.dahan3@gmail.com>"]
-
+readme = "README.md"
 
 [tool.pytest.ini_options]
 addopts = "--color=yes"
