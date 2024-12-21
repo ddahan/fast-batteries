@@ -6,7 +6,7 @@ services:
   app:
     image: "python:3.13.1-bookworm" # Node is installed wih a container "feature" then
     environment:
-      - PYTHONPATH=/workspaces/cookbook/back
+      - PYTHONPATH=/workspaces/fast-batteries/back
       - PYTHONUNBUFFERED=1
       - PYTHONBREAKPOINT=ipdb.set_trace
     volumes:

@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "schemas": "openapi-typescript http://localhost:8000/openapi.json --output '/workspaces/cookbook/front/types/schemas.d.ts' --alphabetize --default-non-nullable"
+    "schemas": "openapi-typescript http://localhost:8000/openapi.json --output '/workspaces/fast-batteries/front/types/schemas.d.ts' --alphabetize --default-non-nullable"
   },
   "dependencies": {
     "@iconify-json/mdi": "^1.2.0",

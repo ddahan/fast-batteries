@@ -10,7 +10,7 @@
           label="Code & Doc"
           icon="i-mdi-github"
           size="xl"
-          to="https://github.com/ddahan/cookbook"
+          to="https://github.com/ddahan/fast-batteries"
           target="_blank"
           class="flex justify-center"
         />

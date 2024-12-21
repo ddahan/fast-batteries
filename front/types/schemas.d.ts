@@ -720,7 +720,7 @@ export interface components {
             /**
              * Base Dir
              * Format: path
-             * @default /workspaces/cookbook/back
+             * @default /workspaces/fast-batteries/back
              */
             BASE_DIR: string;
             /**
