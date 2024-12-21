@@ -23,6 +23,7 @@ jobs:
           POSTGRES_USER: ${{ vars.FAPI_POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ vars.FAPI_POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ vars.FAPI_POSTGRES_DB }}
+          POSTGRES_HOST_AUTH_METHOD: trust
         options: >-
           --health-cmd="pg_isready -U ${{ vars.FAPI_POSTGRES_USER }} -d ${{ vars.FAPI_POSTGRES_DB }}"
           --health-interval=10s
