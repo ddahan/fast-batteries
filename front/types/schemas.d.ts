@@ -692,11 +692,20 @@ export interface components {
              * @default P7D
              */
             ACCESS_TOKEN_EXPIRE: string;
-            /** Alembic Config Path */
+            /**
+             * Alembic Config Path
+             * Format: path
+             */
             readonly ALEMBIC_CONFIG_PATH: string;
-            /** Alembic Migration Path */
+            /**
+             * Alembic Migration Path
+             * Format: path
+             */
             readonly ALEMBIC_MIGRATION_PATH: string;
-            /** Alembic Migration Version Path */
+            /**
+             * Alembic Migration Version Path
+             * Format: path
+             */
             readonly ALEMBIC_MIGRATION_VERSION_PATH: string;
             /**
              * Algorithm
@@ -705,12 +714,12 @@ export interface components {
             ALGORITHM: string;
             /**
              * App Title
-             * @default 🔋 Fast Batteries API
+             * @default 🔋 Fast Batteries
              */
             APP_TITLE: string;
             /**
              * App Version
-             * @default 0.0.1
+             * @default 0.1.0
              */
             APP_VERSION: string;
             /** Back Domain */
@@ -803,7 +812,10 @@ export interface components {
              * @default PT30M
              */
             EMAIL_RESET_TOKEN_EXPIRE: string;
-            /** Email Templates Build Path */
+            /**
+             * Email Templates Build Path
+             * Format: path
+             */
             readonly EMAIL_TEMPLATES_BUILD_PATH: string;
             /** Environment */
             ENVIRONMENT: string;
@@ -851,6 +863,12 @@ export interface components {
              * @default FR
              */
             PHONE_REGION_CODE: string;
+            /** Postgres Admin Password */
+            POSTGRES_ADMIN_PASSWORD: string;
+            /** Postgres Admin Uri */
+            readonly POSTGRES_ADMIN_URI: string;
+            /** Postgres Admin User */
+            POSTGRES_ADMIN_USER: string;
             /** Postgres Db */
             POSTGRES_DB: string;
             /** Postgres Password */
@@ -862,27 +880,17 @@ export interface components {
             POSTGRES_PORT: number;
             /** Postgres Server */
             POSTGRES_SERVER: string;
-            /**
-             * Postgres Test Db
-             * @default testdb
-             */
-            POSTGRES_TEST_DB: string;
-            /**
-             * Postgres Test Password
-             * @default testpwd
-             */
-            POSTGRES_TEST_PASSWORD: string;
-            /**
-             * Postgres Test User
-             * @default testuser
-             */
-            POSTGRES_TEST_USER: string;
             /** Postgres Uri */
             readonly POSTGRES_URI: string;
             /** Postgres User */
             POSTGRES_USER: string;
             /** Protocol */
             PROTOCOL: string;
+            /**
+             * Redirect Slashes
+             * @default false
+             */
+            REDIRECT_SLASHES: boolean;
             /**
              * Redis Db
              * @default 0
@@ -917,8 +925,6 @@ export interface components {
             SMTP_USER?: string | null;
             /** Social Auth Front Redirect Url */
             readonly SOCIAL_AUTH_FRONT_REDIRECT_URL: string;
-            /** Test Postgres Uri */
-            readonly TEST_POSTGRES_URI: string;
             /**
              * Timezone
              * Format: zoneinfo

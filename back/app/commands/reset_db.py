@@ -25,7 +25,7 @@ from app.models.periodic_task import PeriodicTask
 from app.models.user import User
 from app.schemas.periodic_task import PeriodicTaskIn
 from app.schemas.user import UserClassicIn
-from app.utils.cli import create_directory_if_not_exist, erase
+from app.utils.filesystem import create_directory_if_not_exist, erase
 
 
 def reset_db() -> None:
