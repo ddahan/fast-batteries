@@ -9,6 +9,7 @@ from app.core.security import get_password_hash
 from app.models.base import MyModel, SecretIdModel
 from app.schemas.token import AccessJWT
 from app.schemas.user import UserClassicIn, UserLinkedinIn
+from app.utils.fields import Price
 
 if TYPE_CHECKING:
     from app.models.badge import Badge
@@ -26,6 +27,7 @@ class User(SecretIdModel, MyModel):
     first_name: Mapped[str | None]
     last_name: Mapped[str | None]
     phone_number: Mapped[str | None]
+    balance: Mapped[Price | None]
     badges: Mapped[list[Badge]] = relationship(back_populates="owner")
     hashed_password: Mapped[str | None] = mapped_column(default=None)
     linkedin_id: Mapped[str | None] = mapped_column(index=True, unique=True, default=None)

@@ -1,6 +1,7 @@
 #!/usr/local/bin/python
 
 from datetime import timedelta
+from decimal import Decimal
 
 from alembic import command
 from alembic.config import Config
@@ -90,6 +91,7 @@ def seed_db(session: Session) -> None:
             phone_number=PhoneNumber("06 62102508"),
             email="DaviD@mail.com",
             password=SecretStr("azerty123"),
+            balance=Decimal("3.40"),
         ),
         session=session,
     )

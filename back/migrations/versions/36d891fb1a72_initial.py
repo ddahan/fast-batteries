@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: ac6b8f436272
+Revision ID: 36d891fb1a72
 Revises:
-Create Date: 2024-12-21 12:03:13.116537+01:00
+Create Date: 2024-12-22 12:44:52.480268+01:00
 
 """
 
@@ -13,7 +13,7 @@ from alembic import op
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision: str = "ac6b8f436272"
+revision: str = "36d891fb1a72"
 down_revision: str | None = None
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
@@ -59,6 +59,7 @@ def upgrade() -> None:
         sa.Column("first_name", sa.String(), nullable=True),
         sa.Column("last_name", sa.String(), nullable=True),
         sa.Column("phone_number", sa.String(), nullable=True),
+        sa.Column("balance", sa.Numeric(), nullable=True),
         sa.Column("hashed_password", sa.String(), nullable=True),
         sa.Column("linkedin_id", sa.String(), nullable=True),
         sa.Column("is_superuser", sa.Boolean(), nullable=False),

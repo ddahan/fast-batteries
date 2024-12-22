@@ -1,7 +1,9 @@
+from decimal import Decimal
+
 from pydantic import EmailStr, Field, computed_field, field_validator
 
 from app.schemas.base import MySchema, PhoneNumberSchemaIn, PhoneNumberSchemaOut
-from app.utils.fields import Password
+from app.utils.fields import Password, Price
 from app.utils.strings import SecretId
 
 
@@ -9,6 +11,7 @@ class UserBaseIn(PhoneNumberSchemaIn):
     email: EmailStr
     first_name: str = Field(min_length=1, max_length=128)
     last_name: str = Field(min_length=1, max_length=128)
+    balance: Price = Decimal(0)
 
     @field_validator("email", mode="before")
     def normalize_email(cls, value: str) -> str:
