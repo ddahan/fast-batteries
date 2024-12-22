@@ -65,8 +65,9 @@ Check the [`/doc` folder](./doc/) for various information.
 ## Contributions
 
 I need help improving this template over time. Issues and PRs are very welcome. Here’s how you can contribute:
-    - Make the current features more robust (fix mistakes, improve functionality, add use cases and tests, etc.)
-    - Help develop new features (see the [roadmap](https://github.com/users/ddahan/projects/1))
+
+  - Make the current features more robust (fix mistakes, improve functionality, add use cases and tests, etc.)
+  - Help develop new features (see the [roadmap](https://github.com/users/ddahan/projects/1))
 
 ## Public Roadmap
 
