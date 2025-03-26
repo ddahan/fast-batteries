@@ -59,7 +59,6 @@ keep-runtime-typing = true
 [tool.ruff.format]
 docstring-code-format = true
 
-
 [tool.poetry.dependencies]
 ##########################################################################################
 # Main tools
@@ -137,6 +136,9 @@ freezegun = "*"
 # used to 1) have easy access to 'ruff' command for other tools
 #         2) have access to the latest version compared to bundled binary from extension
 ruff = "*"
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
