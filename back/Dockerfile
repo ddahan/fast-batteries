@@ -8,14 +8,14 @@ FROM python:3.13.2-bookworm as requirements-stage
 # Set the working directory inside the container
 WORKDIR /tmp
 
-# Install Poetry for dependency management
-RUN pip install poetry
+# Install Poetry (+ export plugin) for dependency management
+RUN pip install poetry && poetry self add poetry-plugin-export
 
 # Copy only the Poetry configuration files to leverage Docker caching for dependencies
 COPY ./pyproject.toml ./poetry.lock /tmp/
 
-# Check
-RUN poetry --version && poetry check && poetry lock
+# Check poetry version
+RUN poetry --version
 
 # Export dependencies from Poetry to a requirements.txt file for later use
 # This helps avoid installing Poetry in the final image
