@@ -14,6 +14,9 @@ RUN pip install poetry
 # Copy only the Poetry configuration files to leverage Docker caching for dependencies
 COPY ./pyproject.toml ./poetry.lock /tmp/
 
+# Check
+RUN poetry --version && poetry check && poetry lock
+
 # Export dependencies from Poetry to a requirements.txt file for later use
 # This helps avoid installing Poetry in the final image
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes --verbose
