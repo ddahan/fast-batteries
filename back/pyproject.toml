@@ -64,7 +64,7 @@ docstring-code-format = true
 # Main tools
 ##########################################################################################
 # https://github.com/python/cpython
-python = "3.13.1"
+python = "3.13.2"
 
 # https://github.com/tiangolo/fastapi
 fastapi = { version = "*", extras = ["standard"] }
