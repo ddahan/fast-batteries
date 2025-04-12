@@ -3,4 +3,5 @@
     <Header />
   </div>
   <slot />
+  <Common />
 </template>
