@@ -2,6 +2,7 @@
   <ContainerSingle>
     <template #title>Log in to your Account</template>
     <template #main>
+      <AuthFormLogin />
       <AuthSocialSeparator />
       <AuthSocialButtons />
     </template>
