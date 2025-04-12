@@ -20,7 +20,7 @@
             label="Démo"
             icon="i-ph-play-circle-bold"
             size="xl"
-            to="https://github.com/ddahan/fast-batteries"
+            to="/badges"
             class="flex justify-center"
           />
         </div>
