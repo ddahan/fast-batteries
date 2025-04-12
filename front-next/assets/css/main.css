@@ -10,6 +10,10 @@
   --ui-info: var(--ui-color-info-500);
   --ui-warning: var(--ui-color-warning-500);
   --ui-error: var(--ui-color-error-500);
+
+  /* https://ui.nuxt.com/getting-started/theme#neutral-palette */
+
+  --ui-bg: var(--ui-color-neutral-50);
 }
 
 .dark {
@@ -19,13 +23,24 @@
   --ui-info: var(--ui-color-info-400);
   --ui-warning: var(--ui-color-warning-400);
   --ui-error: var(--ui-color-error-400);
+
+  --ui-bg: var(--ui-color-neutral-950);
 }
 
-/* https://github.com/nuxt/ui/issues/2332 */
+/* The base layer is for things like reset rules or default styles applied to plain HTML elements. */
 @layer base {
+  /* https://github.com/nuxt/ui/issues/2332 */
   button,
   [role="button"] {
     @apply cursor-pointer;
     @apply disabled:cursor-not-allowed;
   }
+}
+
+/* The components layer is for class-based styles that you want to be able to override with utilities. */
+@layer components {
+}
+
+/* The utilities layer is for small, single-purpose classes that should always take precedence over any other styles. */
+@layer utilities {
 }

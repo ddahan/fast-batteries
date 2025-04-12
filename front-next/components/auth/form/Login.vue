@@ -1,7 +1,7 @@
 <template>
   <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit" novalidate>
     <ContainerVerticalInputs>
-      <!-- <FormNonFieldError :form="form" />  -->
+      <FormNonFieldError :form="form" />
       <FormGroupEmail v-model="state.username" :inputAttrs="{ autofocus: true, class: 'w-full' }" />
       <FormGroupPassword
         v-model="state.password"
@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import type { FormSubmitEvent } from "#ui/types"
-import { z } from "zod"
+import type { FormSubmitEvent } from "@nuxt/ui"
+import * as z from "zod"
 
 const form = ref()
 const status: Ref<RequestStatus> = ref("idle")
@@ -32,10 +32,13 @@ const state = reactive({
 type Schema = z.output<typeof schema>
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  // const token = await myFetch(form, status)<Token>("auth/access-token", {
-  //   method: "post",
-  //   body: new URLSearchParams(state), // required format for OAuth2
-  // })
+  console.log(event.data)
+  console.log(state)
+  const token = await myFetch(form, status)<Token>("auth/access-token", {
+    method: "post",
+    body: new URLSearchParams(state), // required format for OAuth2
+  })
+  console.log(token)
   // if (token) {
   //   login(token)
   // }
