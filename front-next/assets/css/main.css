@@ -20,3 +20,12 @@
   --ui-warning: var(--ui-color-warning-400);
   --ui-error: var(--ui-color-error-400);
 }
+
+/* https://github.com/nuxt/ui/issues/2332 */
+@layer base {
+  button,
+  [role="button"] {
+    @apply cursor-pointer;
+    @apply disabled:cursor-not-allowed;
+  }
+}
