@@ -1,13 +1,13 @@
 <template>
   <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit" novalidate>
     <ContainerVerticalInputs>
-      <FormNonFieldError :form="form" />
       <FormGroupEmail v-model="state.username" :inputAttrs="{ autofocus: true, class: 'w-full' }" />
       <FormGroupPassword
         v-model="state.password"
         :inputAttrs="{ autocomplete: 'current-password', class: 'w-full' }"
       />
       <ButtonSubmit :status="status" label="Log in" block />
+      <FormNonFieldError :form="form" />
     </ContainerVerticalInputs>
   </UForm>
 </template>
@@ -16,7 +16,7 @@
 import type { FormSubmitEvent } from "@nuxt/ui"
 import * as z from "zod"
 
-const form = ref()
+const form = useTemplateRef("form")
 const status: Ref<RequestStatus> = ref("idle")
 
 const schema = z.object({
@@ -24,7 +24,7 @@ const schema = z.object({
   password: z.string(),
 })
 
-const state = reactive({
+const state = reactive<Schema>({
   username: "",
   password: "",
 })
@@ -32,13 +32,12 @@ const state = reactive({
 type Schema = z.output<typeof schema>
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  console.log(event.data)
-  console.log(state)
-  const token = await myFetch(form, status)<Token>("auth/access-token", {
-    method: "post",
-    body: new URLSearchParams(state), // required format for OAuth2
-  })
-  console.log(token)
+  addSuccessToast("test", "super cool youhou !!!")
+  // const token = await myFetch(form, status)<Token>("auth/access-token", {
+  //   method: "post",
+  //   body: new URLSearchParams(state), // required format for OAuth2
+  // })
+  // console.log(token)
   // if (token) {
   //   login(token)
   // }

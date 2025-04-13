@@ -44,12 +44,12 @@ export const myFetch = (form?: Ref, status = ref("idle")) => {
 
       // -- Add a 'nonfield' for each non field error
       errorPayload.nonfield?.forEach((message) => {
-        form!.value.setErrors([{ path: "nonfield", message: message }])
+        form!.value.setErrors([{ name: "nonfield", message: message }])
       })
 
       // -- Add a field error for each field error
       Object.entries(errorPayload.field || {}).forEach(([key, message]) => {
-        form!.value.setErrors([{ path: key, message: message }])
+        form!.value.setErrors([{ name: key, message: message }])
       })
 
       if (response.status === 401 || response.status === 403) {
