@@ -16,13 +16,11 @@
 const networks = [
   { name: "Github", icon: "i-bxl-github", slug: "github" },
   { name: "Linked In", icon: "i-bxl-linkedin-square", slug: "linkedin" },
-  // { name: "Google", icon: "i-bxl-google", slug: "google" },
-  // { name: "Apple", icon: "i-bxl-apple", slug: "apple" },
 ]
 
-// const status: Ref<RequestStatus> = ref("idle")
+const status: Ref<RequestStatus> = ref("idle")
 const login = async (slug: string) => {
-  // const authorizationUrl = await myFetch(undefined, status)<string>(`auth/${slug}`)
-  // window.location.href = authorizationUrl
+  const authorizationUrl = await myFetch(undefined, status)<string>(`auth/${slug}`)
+  window.location.href = authorizationUrl
 }
 </script>
