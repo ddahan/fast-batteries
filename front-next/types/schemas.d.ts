@@ -937,6 +937,11 @@ export interface components {
         /** UserClassicIn */
         UserClassicIn: {
             /**
+             * Balance
+             * @default 0
+             */
+            balance: number | string;
+            /**
              * Email
              * Format: email
              */
@@ -974,10 +979,10 @@ export interface components {
         /** UserResetPassword */
         UserResetPassword: {
             /**
-             * Newpassword
+             * Password
              * Format: password
              */
-            newPassword: string;
+            password: string;
             /** Tokenkey */
             tokenKey: string;
         };
