@@ -1,5 +1,15 @@
 <template>
-  <div>send-reset-password-link page</div>
+  <ContainerSingle>
+    <template #title>Forgot your password?</template>
+
+    <template #main>
+      <AuthFormSendResetPdwLink />
+    </template>
+  </ContainerSingle>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  layout: "solo",
+})
+</script>
