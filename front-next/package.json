@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.35",
+    "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/ph": "^1.2.2",
     "@internationalized/date": "^3.8.0",
     "@nuxt/ui": "^3.0.2",
