@@ -8,6 +8,77 @@
           </template>
         </CrudHeader>
       </template>
+
+      <!-- Filters -->
+      <div class="flex items-center justify-between gap-3 px-4 py-3">
+        <UInput
+          size="md"
+          class="ms-2"
+          v-model="search"
+          name="search"
+          placeholder="Search owner..."
+          @update:modelValue="onSearchUpdated"
+          leading-icon="i-ph-magnifying-glass"
+          autocomplete="off"
+        >
+          <template #trailing>
+            <UButton
+              v-if="search"
+              @click="onSearchClosed"
+              icon="i-ph-x-bold"
+              size="xs"
+              color="neutral"
+              variant="link"
+              :padded="false"
+            />
+          </template>
+        </UInput>
+
+        <div class="flex items-center gap-1.5">
+          <span class="text-sm">Rows per page:</span>
+          <USelect
+            v-model="pageSize"
+            @update:modelValue="onPageSizeUpdated"
+            :items="[5, 10, 20, 50]"
+            class="me-2 w-20"
+            size="md"
+          />
+        </div>
+      </div>
+
+      <!-- Table -->
+      <UTable
+        :ui="{
+          tbody: `transition duration-150 ease-in-out ${status == 'pending' ? 'opacity-30' : 'opacity-100'}`,
+        }"
+        :data="data.items"
+        :columns="columns"
+      >
+        <template #owner-cell="{ row }">
+          {{ row.original.owner.label }}
+        </template>
+        <template #expireAt-cell="{ row }">
+          <UBadge
+            class="px-3"
+            :color="row.original.expired ? 'warning' : 'neutral'"
+            variant="solid"
+          >
+            <div class="flex w-20 items-center justify-center gap-1">
+              <UIcon
+                class="shrink-0"
+                :name="
+                  row.original.expired ? 'i-ph-calendar-x-duotone' : 'i-ph-calendar-check-duotone'
+                "
+              />
+              {{ dateToLabel(new Date(row.original.expireAt!)) }}
+            </div>
+          </UBadge>
+        </template>
+        <template #isActive-cell="{ row }">
+          <UiYesOrNo :value="row.original.isActive" class="mt-1" />
+        </template>
+      </UTable>
+
       <!-- Number of rows & Pagination -->
       <template #footer>
         <CrudPagination v-model="page" @update:modelValue="onPageUpdated" :paginationData="data" />
@@ -17,36 +88,27 @@
 </template>
 
 <script setup lang="ts">
+import type { TableColumn } from "@nuxt/ui"
 import { useDebounceFn } from "@vueuse/core"
 
-// Sorting
-const sort = ref({
-  column: "id",
-  direction: "asc" as "asc" | "desc",
-})
+type TableBadgeOut = Pick<BadgeOut, "id" | "owner" | "expired" | "expireAt" | "isActive">
 
-const columns = [
+const columns: TableColumn<TableBadgeOut>[] = [
   {
-    key: "owner",
-    label: "Owner",
-    class: "w-3/12",
+    accessorKey: "owner",
+    header: "Owner",
   },
   {
-    key: "id",
-    label: "Id",
-    sortable: true,
-    class: "w-4/12",
+    accessorKey: "id",
+    header: "Id",
   },
   {
-    key: "expireAt",
-    label: "Expiration",
-    sortable: true,
-    class: "w-3/12",
+    accessorKey: "expireAt",
+    header: "Expiration",
   },
   {
-    key: "isActive",
-    label: "Active ?",
-    class: "w-2/12",
+    accessorKey: "isActive",
+    header: "Active ?",
   },
 ]
 
@@ -59,17 +121,12 @@ const search = ref("")
 
 const page = ref(1) // display 1st page by default
 const pageSize = ref(10) // display 10 results by default
-const ordering = computed(
-  // Translates Nuxt UI ordering convention to back-end one
-  () => (sort.value.direction === "desc" ? "-" : "") + sort.value.column
-)
 
 const refresh = async () => {
   data.value = await myFetch(undefined, status)<Page<BadgeOut>>("badges", {
     query: {
       ...(search.value.trim() && { search: search.value }), // add search in query only if not empty
       page: page.value,
-      ordering: ordering.value,
       pageSize: pageSize.value,
     },
   })
