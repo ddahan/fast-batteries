@@ -16,4 +16,9 @@
 definePageMeta({
   layout: "solo",
 })
+
+const { hasToken } = useAuthService()
+if (hasToken()) {
+  await navigateTo("/auth/already-logged-in")
+}
 </script>
