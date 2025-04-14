@@ -32,14 +32,13 @@ const state = reactive<Schema>({
 type Schema = z.output<typeof schema>
 
 const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  addSuccessToast("test", "super cool youhou !!!")
-  // const token = await myFetch(form, status)<Token>("auth/access-token", {
-  //   method: "post",
-  //   body: new URLSearchParams(state), // required format for OAuth2
-  // })
-  // console.log(token)
-  // if (token) {
-  //   login(token)
-  // }
+  const token = await myFetch(form, status)<Token>("auth/access-token", {
+    method: "post",
+    body: new URLSearchParams(state), // required format for OAuth2
+  })
+  console.log(token)
+  if (token) {
+    login(token)
+  }
 }
 </script>
