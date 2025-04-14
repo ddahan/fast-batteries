@@ -1,4 +1,6 @@
 export default defineAppConfig({
+  defaultDebounce: 300,
+  defaultHide: 1000,
   ui: {
     // theme
     colors: {
