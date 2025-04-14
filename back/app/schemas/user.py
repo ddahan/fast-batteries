@@ -40,7 +40,7 @@ class UserSendResetPassword(MySchema):
 
 class UserResetPassword(MySchema):
     token_key: str
-    new_password: Password
+    new_password: Password = Field(alias="password")
 
 
 # Properties to return via API
