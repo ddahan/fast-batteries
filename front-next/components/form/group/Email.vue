@@ -1,5 +1,5 @@
 <template>
-  <UFormField label="Email" name="username">
+  <UFormField label="Email" name="email">
     <UInput
       v-model="model"
       v-bind="inputAttrs"
