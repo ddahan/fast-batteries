@@ -53,6 +53,8 @@
         }"
         :data="data.items"
         :columns="columns"
+        empty="No badges found"
+        @select="onRowSelected"
       >
         <template #owner-cell="{ row }">
           {{ row.original.owner.label }}
@@ -88,7 +90,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TableColumn } from "@nuxt/ui"
+import type { TableColumn, TableRow } from "@nuxt/ui"
 import { useDebounceFn } from "@vueuse/core"
 
 type TableBadgeOut = Pick<BadgeOut, "id" | "owner" | "expired" | "expireAt" | "isActive">
@@ -166,7 +168,7 @@ const onPageUpdated = () => {
 
 // Row selection
 
-const onRowSelected = async (badge: BadgeOut) => {
-  await navigateTo("/badges/" + badge.id)
+const onRowSelected = async (row: TableRow<TableBadgeOut>, e?: Event) => {
+  await navigateTo("/badges/" + row.original.id)
 }
 </script>

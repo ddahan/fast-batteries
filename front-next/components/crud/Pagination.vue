@@ -12,9 +12,9 @@
       </span>
     </div>
     <UPagination
-      v-model="page"
+      v-model:page="page"
       :total="paginationData.totalItems"
-      :pageCount="paginationData.requestedPageSize"
+      :itemsPerPage="paginationData.requestedPageSize"
       :ui="{
         list: 'flex items-center gap-1',
         item: 'pagination-button',
