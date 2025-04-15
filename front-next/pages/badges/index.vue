@@ -46,7 +46,10 @@
         </div>
       </div>
 
-      <!-- Table -->
+      <!--
+      Table
+      https://tanstack.com/table/latest/docs/api/features/sorting
+      -->
       <UTable
         :ui="{
           tbody: `transition duration-150 ease-in-out ${status == 'pending' ? 'opacity-30' : 'opacity-100'}`,
@@ -55,6 +58,9 @@
         :columns="columns"
         empty="No badges found"
         @select="onRowSelected"
+        :state="{ sorting: sorting }"
+        @update:sorting="onSortingUpdated"
+        :sorting-options="{ enableSorting: true, manualSorting: true, enableSortingRemoval: true }"
       >
         <template #owner-cell="{ row }">
           {{ row.original.owner.label }}
@@ -92,25 +98,46 @@
 <script setup lang="ts">
 import type { TableColumn, TableRow } from "@nuxt/ui"
 import { useDebounceFn } from "@vueuse/core"
+import { h, resolveComponent } from "vue"
 
-type TableBadgeOut = Pick<BadgeOut, "id" | "owner" | "expired" | "expireAt" | "isActive">
+const UBadge = resolveComponent("UBadge")
+const UButton = resolveComponent("UButton")
 
-const columns: TableColumn<TableBadgeOut>[] = [
+const columns: TableColumn<BadgeOut>[] = [
   {
     accessorKey: "owner",
     header: "Owner",
+    meta: { class: { th: "w-3/12" } },
   },
   {
     accessorKey: "id",
     header: "Id",
+    meta: { class: { th: "w-4/12" } },
   },
   {
     accessorKey: "expireAt",
-    header: "Expiration",
+    header: ({ column }) => {
+      const isSorted = column.getIsSorted()
+
+      return h(UButton, {
+        color: "neutral",
+        variant: "ghost",
+        label: "Expiration",
+        icon: isSorted
+          ? isSorted === "asc"
+            ? "i-lucide-arrow-up-narrow-wide"
+            : "i-lucide-arrow-down-wide-narrow"
+          : "i-lucide-arrow-up-down",
+        class: "-mx-2.5",
+        onClick: column.getToggleSortingHandler(),
+      })
+    },
+    meta: { class: { th: "w-3/12" } },
   },
   {
     accessorKey: "isActive",
     header: "Active ?",
+    meta: { class: { th: "w-2/12" } },
   },
 ]
 
@@ -121,13 +148,21 @@ const status: Ref<RequestStatus> = ref("idle")
 // Search
 const search = ref("")
 
+// Pagination
 const page = ref(1) // display 1st page by default
 const pageSize = ref(10) // display 10 results by default
 
+// Sorting
+type SortingItem = { id: string; desc: boolean }
+const sorting = ref([] as SortingItem[])
+const backEndOrdering = ref("")
+
+// Data fetching
 const refresh = async () => {
   data.value = await myFetch(undefined, status)<Page<BadgeOut>>("badges", {
     query: {
       ...(search.value.trim() && { search: search.value }), // add search in query only if not empty
+      ...(backEndOrdering.value && { ordering: backEndOrdering.value }), // add ordering in query only if not empty
       page: page.value,
       pageSize: pageSize.value,
     },
@@ -152,12 +187,21 @@ const onSearchClosed = () => {
   refresh()
 }
 
-const onPageSizeUpdated = () => {
+const onSortingUpdated = (newSorting: SortingItem[]) => {
+  sorting.value = newSorting
+
+  const sort = newSorting?.[0]
+  if (sort) {
+    backEndOrdering.value = sort.desc ? `-${sort.id}` : sort.id
+  } else {
+    backEndOrdering.value = ""
+  }
+
   page.value = 1
   refresh()
 }
 
-const onOrderingUpdated = () => {
+const onPageSizeUpdated = () => {
   page.value = 1
   refresh()
 }
@@ -168,7 +212,7 @@ const onPageUpdated = () => {
 
 // Row selection
 
-const onRowSelected = async (row: TableRow<TableBadgeOut>, e?: Event) => {
+const onRowSelected = async (row: TableRow<BadgeOut>, e?: Event) => {
   await navigateTo("/badges/" + row.original.id)
 }
 </script>
