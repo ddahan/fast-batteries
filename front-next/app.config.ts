@@ -19,7 +19,7 @@ export default defineAppConfig({
         size: "lg",
       },
     },
-    select: {
+    selectMenu: {
       defaultVariants: {
         size: "lg",
       },

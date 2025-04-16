@@ -69,7 +69,7 @@
           <UBadge
             class="px-3"
             :color="row.original.expired ? 'warning' : 'neutral'"
-            variant="solid"
+            variant="subtle"
           >
             <div class="flex w-20 items-center justify-center gap-1">
               <UIcon
