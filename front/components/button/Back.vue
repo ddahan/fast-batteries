@@ -1,9 +1,0 @@
-<template>
-  <UButton
-    label="Back"
-    to="."
-    variant="outline"
-    color="gray"
-    icon="i-ph-arrow-arc-left"
-  />
-</template>
