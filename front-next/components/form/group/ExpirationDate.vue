@@ -4,7 +4,7 @@
     name="expiration"
     help="Once expired, the badge won't be usable"
   >
-    <UPopover v-model:open="isCalendarOpen">
+    <UPopover arrow v-model:open="isCalendarOpen">
       <UButton
         color="neutral"
         block

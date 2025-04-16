@@ -1,6 +1,7 @@
 <template>
   <UFormField label="Owner" name="owner">
     <USelectMenu
+      arrow
       icon="i-ph-user"
       placeholder="Select a person"
       v-model="model"
@@ -11,18 +12,18 @@
         placeholder: 'Search a name...',
         icon: 'i-lucide-search',
       }"
+      ignore-filter
       :items="foundOwners"
-      :loading="status === 'pending'"
-      @update:searchTerm="searchBadgeOwner"
-      by="id"
+      @update:searchTerm="debouncedSearchBadgeOwner"
     />
   </UFormField>
 </template>
 
 <script setup lang="ts">
+import { useDebounceFn } from "@vueuse/core"
+
 const model = defineModel<BadgeOwner>()
-const props = defineProps<{ inputAttrs?: Record<string, unknown> }>()
-const { inputAttrs } = toRefs(props)
+defineProps<{ inputAttrs?: Record<string, unknown> }>()
 
 const search = ref("")
 const foundOwners = ref<BadgeOwner[]>([])
@@ -42,4 +43,5 @@ const searchBadgeOwner = async () => {
 }
 
 onMounted(() => searchBadgeOwner())
+const debouncedSearchBadgeOwner = useDebounceFn(searchBadgeOwner, useAppConfig().defaultDebounce)
 </script>

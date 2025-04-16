@@ -1,5 +1,5 @@
 <template>
-  <UPopover v-model:open="open"  :content="{
+  <UPopover arrow v-model:open="open"  :content="{
       align: 'start',
       side: 'bottom',
       sideOffset: 8
