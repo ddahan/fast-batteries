@@ -4,7 +4,7 @@
     :loading="status == 'pending'"
     loading-icon="i-ph-arrows-clockwise"
     :label="status == 'pending' ? '' : label"
-    :ui="{ base: 'min-w-32', inline: 'justify-center' }"
+    :ui="{ base: 'min-w-32 justify-center' }"
   />
 </template>
 
