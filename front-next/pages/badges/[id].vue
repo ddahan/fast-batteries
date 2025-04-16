@@ -18,11 +18,7 @@
         @update:modelValue="updateData"
         :inputAttrs="{ class: 'w-full' }"
       />
-      <FormGroupExpirationDate
-        v-model="state.expireAt"
-        @update:modelValue="updateData"
-        :inputAttrs="{ class: 'w-full', root: 'justify-start' }"
-      />
+      <FormGroupExpirationDate v-model="state.expireAt" @update:modelValue="updateData" />
       <FormGroupActive v-model="state.isActive" @update:modelValue="updateData" />
     </ContainerVerticalInputs>
 
