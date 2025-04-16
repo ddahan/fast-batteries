@@ -1,6 +1,6 @@
 <template>
   <div
-    class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow dark:divide-gray-800 dark:bg-gray-800"
+    class="divide-y divide-(--ui-border-muted) overflow-hidden rounded-lg bg-(--ui-container) shadow-sm"
   >
     <slot />
   </div>

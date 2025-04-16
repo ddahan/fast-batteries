@@ -11,9 +11,8 @@
   --ui-warning: var(--ui-color-warning-500);
   --ui-error: var(--ui-color-error-500);
 
-  /* https://ui.nuxt.com/getting-started/theme#neutral-palette */
-
   --ui-bg: var(--ui-color-neutral-50);
+  --ui-container: var(--color-white);
 }
 
 .dark {
@@ -25,6 +24,7 @@
   --ui-error: var(--ui-color-error-400);
 
   --ui-bg: var(--ui-color-neutral-950);
+  --ui-container: var(--ui-color-neutral-800);
 }
 
 /* The base layer is for things like reset rules or default styles applied to plain HTML elements. */

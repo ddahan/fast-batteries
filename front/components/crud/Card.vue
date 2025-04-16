@@ -7,10 +7,7 @@
       </div>
 
       <!-- body -->
-      <div
-        class="divide-y divide-gray-200 dark:divide-gray-700"
-        :class="{ 'py-8': withVerticalPadding }"
-      >
+      <div class="divide-y divide-(--ui-border-muted)" :class="{ 'py-8': withVerticalPadding }">
         <slot />
       </div>
 

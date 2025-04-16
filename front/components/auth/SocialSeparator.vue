@@ -1,3 +1,7 @@
 <template>
-  <USeparator class="my-8" :ui="{ border: 'dark:border-gray-600' }" label="Or continue with" />
+  <USeparator
+    class="my-8"
+    :ui="{ border: 'border-(--ui-border-muted)' }"
+    label="Or continue with"
+  />
 </template>
