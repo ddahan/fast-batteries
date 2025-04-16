@@ -50,7 +50,7 @@ The philosophy slightly differs from other templates, as it avoids relying on sm
 
 ### 🎨 Front-end
   - Demos: CRUD (including pagination/ordering/filtering) + login/signup workflow
-  - Made with [Nuxt](https://nuxt.com/) (Vue.js) and [NuxtUI](https://ui.nuxt.com/) (uses [Tailwind CSS](https://tailwindcss.com/))
+  - Made with [Nuxt](https://nuxt.com/) (Vue.js) and [NuxtUI v3](https://ui.nuxt.com/) (uses [Tailwind CSS v4](https://tailwindcss.com/))
   - Dark mode support
   - Typescript interfaces and schemas auto-generation with [OpenAPI TypeScript](https://openapi-ts.dev/)
 
