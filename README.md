@@ -106,4 +106,4 @@ Nuxt is not used here for its SSR abilities. However, Nuxt helps a lot to make t
 
 ## About me
 
-I'm David, 36, living in Paris. Learn more about me [on my website](https://david-dahan.com)
+I'm David, 37, living in Paris. Learn more about me [on my website](https://david-dahan.com)
