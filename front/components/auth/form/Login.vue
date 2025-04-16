@@ -1,8 +1,8 @@
 <template>
   <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit" novalidate>
     <ContainerVerticalInputs>
-      <FormGroupEmail v-model="state.email" :inputAttrs="{ autofocus: true, class: 'w-full' }" />
-      <FormGroupPassword
+      <FormFieldEmail v-model="state.email" :inputAttrs="{ autofocus: true, class: 'w-full' }" />
+      <FormFieldPassword
         v-model="state.password"
         :inputAttrs="{ autocomplete: 'current-password', class: 'w-full' }"
       />

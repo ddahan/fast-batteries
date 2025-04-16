@@ -1,7 +1,7 @@
 <template>
   <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit">
     <ContainerVerticalInputs>
-      <FormGroupEmail v-model="state.email" :inputAttrs="{ autofocus: true, class: 'w-full' }" />
+      <FormFieldEmail v-model="state.email" :inputAttrs="{ autofocus: true, class: 'w-full' }" />
       <ButtonSubmit label="Send me reset password link" :status="status" block />
     </ContainerVerticalInputs>
   </UForm>

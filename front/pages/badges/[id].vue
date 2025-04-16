@@ -12,14 +12,14 @@
     <FormNonFieldError :form="form" />
 
     <ContainerVerticalInputs class="mx-auto">
-      <FormGroupId :modelValue="getData.id" :inputAttrs="{ class: 'w-full' }" />
-      <FormGroupOwner
+      <FormFieldId :modelValue="getData.id" :inputAttrs="{ class: 'w-full' }" />
+      <FormFieldOwner
         v-model="state.owner"
         @update:modelValue="updateData"
         :inputAttrs="{ class: 'w-full' }"
       />
-      <FormGroupExpirationDate v-model="state.expireAt" @update:modelValue="updateData" />
-      <FormGroupActive v-model="state.isActive" @update:modelValue="updateData" />
+      <FormFieldExpirationDate v-model="state.expireAt" @update:modelValue="updateData" />
+      <FormFieldActive v-model="state.isActive" @update:modelValue="updateData" />
     </ContainerVerticalInputs>
 
     <template #footer>

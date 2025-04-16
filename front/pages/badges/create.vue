@@ -8,9 +8,9 @@
       <FormNonFieldError :form="form" />
 
       <ContainerVerticalInputs class="mx-auto">
-        <FormGroupOwner v-model="state.owner" :inputAttrs="{ class: 'w-full' }" />
-        <FormGroupExpirationDate v-model="state.expireAt" />
-        <FormGroupActive v-model="state.isActive" />
+        <FormFieldOwner v-model="state.owner" :inputAttrs="{ class: 'w-full' }" />
+        <FormFieldExpirationDate v-model="state.expireAt" />
+        <FormFieldActive v-model="state.isActive" />
       </ContainerVerticalInputs>
 
       <template #footer>

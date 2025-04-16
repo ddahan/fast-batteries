@@ -1,7 +1,7 @@
 <template>
   <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit">
     <ContainerVerticalInputs>
-      <FormGroupPassword
+      <FormFieldPassword
         v-model="state.password"
         :inputAttrs="{ autofocus: true, autocomplete: 'new-password', class: 'w-full' }"
       />

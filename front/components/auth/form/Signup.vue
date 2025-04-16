@@ -2,12 +2,12 @@
   <UForm ref="form" :state="state" :schema="schema" @submit="onSubmit" novalidate>
     <ContainerVerticalInputs>
       <ContainerHorizontalInputs>
-        <FormGroupFirstName v-model="state.firstName" required class="grow" />
-        <FormGroupLastName v-model="state.lastName" required class="grow" />
+        <FormFieldFirstName v-model="state.firstName" required class="grow" />
+        <FormFieldLastName v-model="state.lastName" required class="grow" />
       </ContainerHorizontalInputs>
 
-      <FormGroupEmail v-model="state.email" :inputAttrs="{ class: 'w-full' }" required />
-      <FormGroupPassword
+      <FormFieldEmail v-model="state.email" :inputAttrs="{ class: 'w-full' }" required />
+      <FormFieldPassword
         v-model="state.password"
         :inputAttrs="{ autocomplete: 'new-password', class: 'w-full' }"
         required
