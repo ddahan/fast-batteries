@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import type { FormSubmitEvent } from "#ui/types"
-import { z } from "zod"
+import * as z from "zod"
 
 const form = useTemplateRef("form")
 const status: Ref<RequestStatus> = ref("idle")
