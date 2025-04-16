@@ -2,15 +2,18 @@
   <UFormField label="Owner" name="owner">
     <USelectMenu
       icon="i-ph-user"
-      v-model="model"
-      v-bind="inputAttrs"
-      :items="searchBadgeOwner"
       placeholder="Select a person"
+      v-model="model"
+      v-model:searchTerm="search"
+      v-bind="inputAttrs"
+      :searchable="true"
       :search-input="{
         placeholder: 'Search a name...',
         icon: 'i-lucide-search',
       }"
-      :debounce="useAppConfig().defaultDebounce"
+      :items="foundOwners"
+      :loading="status === 'pending'"
+      @update:searchTerm="searchBadgeOwner"
       by="id"
     />
   </UFormField>
@@ -21,17 +24,22 @@ const model = defineModel<BadgeOwner>()
 const props = defineProps<{ inputAttrs?: Record<string, unknown> }>()
 const { inputAttrs } = toRefs(props)
 
+const search = ref("")
+const foundOwners = ref<BadgeOwner[]>([])
+
 const status: Ref<RequestStatus> = ref("idle")
-const searchBadgeOwner: any = async (search: string) => {
+const searchBadgeOwner = async () => {
   const data = await myFetch(undefined, status)<Page<BadgeOwner>>("users", {
     query: {
-      ...(search.trim() && { search: search }), // add search in query only if not empty
+      ...(search.value.trim() && { search: search.value }), // add search in query only if not empty
       pageSize: 10,
     },
   })
 
   if (data) {
-    return data.items
+    foundOwners.value = data.items
   }
 }
+
+onMounted(() => searchBadgeOwner())
 </script>
