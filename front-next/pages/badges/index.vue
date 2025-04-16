@@ -58,9 +58,12 @@
         :columns="columns"
         empty="No badges found"
         @select="onRowSelected"
-        :state="{ sorting: sorting }"
+        v-model:sorting="sorting"
         @update:sorting="onSortingUpdated"
-        :sorting-options="{ enableSorting: true, manualSorting: true, enableSortingRemoval: true }"
+        :sorting-options="{
+          manualSorting: true,
+          enableSortingRemoval: true,
+        }"
       >
         <template #owner-cell="{ row }">
           {{ row.original.owner.label }}
@@ -154,7 +157,12 @@ const pageSize = ref(10) // display 10 results by default
 
 // Sorting
 type SortingItem = { id: string; desc: boolean }
-const sorting = ref([] as SortingItem[])
+const sorting = ref<SortingItem[]>([{ id: "expireAt", desc: false }])
+
+onMounted(() => {
+  onSortingUpdated(sorting.value)
+})
+
 const backEndOrdering = ref("")
 
 // Data fetching
