@@ -35,7 +35,6 @@ def read_db_parameters(db_parameters: DBParametersDep):
 
 @router.post("/upload")
 def create_upload_file(file: UploadFile):
-    # TODO: POC with S3 Client on CloudFlare
     # https://stackoverflow.com/questions/70520522/how-to-upload-file-in-fastapi-then-to-amazon-s3-and-finally-process-it
     return {"filename": file.filename, "content_type": file.content_type}
 

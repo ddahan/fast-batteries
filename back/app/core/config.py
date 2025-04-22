@@ -250,6 +250,20 @@ class Settings(BaseSettings):
     celery_beat_scheduler: str = "app.core.scheduling:MyDatabaseScheduler"
 
     ######################################################################################
+    # MinIO
+    ######################################################################################
+
+    MINIO_SERVER: str
+    MINIO_ACCESS_KEY: str
+    MINIO_SECRET_KEY: str
+    MINIO_BUCKET_NAME: str
+
+    @computed_field
+    @property
+    def MINIO_ENDPOINT(self) -> str:
+        return f"http://{self.MINIO_SERVER}"
+
+    ######################################################################################
     # Model Config (used for Pydantic configuration)
     # https://docs.pydantic.dev/latest/concepts/pydantic_settings
     ######################################################################################
