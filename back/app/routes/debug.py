@@ -1,16 +1,20 @@
 from time import sleep
 from typing import Any
 
+import boto3
+from botocore.exceptions import BotoCoreError, ClientError
 from fastapi import APIRouter, BackgroundTasks, Depends, UploadFile
+from mypy_boto3_s3 import S3Client
 
 from app.core.auth import get_current_superuser
-from app.core.config import Settings, SettingsDep
+from app.core.config import Settings, SettingsDep, get_settings
 from app.core.exceptions import ErrorPayload
 from app.core.query_pagination import Page, Pagination
 from app.models.db_parameters import DBParametersDep
 from app.schemas.message import Message
 from app.utils.orm import model_to_dict
 
+settings = get_settings()
 router = APIRouter(prefix="/debug", tags=["Debug"])
 
 
@@ -34,9 +38,31 @@ def read_db_parameters(db_parameters: DBParametersDep):
 
 
 @router.post("/upload")
-def create_upload_file(file: UploadFile):
-    # https://stackoverflow.com/questions/70520522/how-to-upload-file-in-fastapi-then-to-amazon-s3-and-finally-process-it
-    return {"filename": file.filename, "content_type": file.content_type}
+def upload_files(files: list[UploadFile]) -> dict[str, Any]:
+    uploaded_files: list[dict[str, Any]] = []
+
+    s3_client: S3Client = boto3.client(  # type: ignore
+        service_name="s3",
+        endpoint_url=settings.MINIO_ENDPOINT,
+        aws_access_key_id=settings.MINIO_ACCESS_KEY,
+        aws_secret_access_key=settings.MINIO_SECRET_KEY,
+    )
+
+    for file in files:
+        try:
+            s3_client.upload_fileobj(
+                Fileobj=file.file,
+                Bucket=settings.MINIO_BUCKET_NAME,
+                Key=str(file.filename),
+                ExtraArgs={"ContentType": file.content_type},
+            )
+            uploaded_files.append(
+                {"filename": file.filename, "content_type": file.content_type}
+            )
+        except (BotoCoreError, ClientError) as e:
+            return {"error": f"Failed to upload {file.filename}: {str(e)}"}
+
+    return {"uploaded": uploaded_files}
 
 
 @router.get("/bg-task")

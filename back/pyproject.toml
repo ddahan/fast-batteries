@@ -136,6 +136,12 @@ freezegun = "*"
 #         2) have access to the latest version compared to bundled binary from extension
 ruff = "*"
 
+# https://github.com/boto/boto3
+boto3 = "1.37.38"
+
+# https://github.com/youtype/mypy_boto3_builder
+boto3-stubs = { extras = ["s3"], version = "1.37.38" }
+
 [tool.poetry.requires-plugins]
 poetry-plugin-export = "*"
 
