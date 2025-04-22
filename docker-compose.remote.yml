@@ -138,6 +138,24 @@ services:
       timeout: 10s
       retries: 5
     <<: *common
+  ########################################################################################
+  # MinIO service
+  ########################################################################################
+  minio:
+    image: minio/minio:RELEASE.2025-04-03T14-56-28Z
+    command: server /data
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget --spider -q http://localhost:9000/minio/health/live",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    <<: *common
 
 networks:
   dokploy-network:
@@ -147,3 +165,4 @@ volumes:
   pg-data:
   pgadmin-data:
   redis-data:
+  minio-data:
