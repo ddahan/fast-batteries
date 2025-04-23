@@ -16,7 +16,13 @@
             </UCard>
 
             <div class="flex gap-x-4">
-              <UButton class="w-3/4" icon="i-ph-file-bold" block>
+              <UButton
+                class="w-3/4"
+                block
+                icon="i-ph-file-bold"
+                :loading="status === 'pending'"
+                @click="onSubmit()"
+              >
                 <b>{{ `Upload ${files.length} ${files.length === 1 ? "file" : "files"}` }}</b>
               </UButton>
               <UButton
@@ -40,9 +46,29 @@
 <script setup lang="ts">
 import { useFileDialog } from "@vueuse/core"
 
-const { files, open, reset, onCancel, onChange } = useFileDialog({})
+const { files, open, reset } = useFileDialog({ accept: "*/*", multiple: true })
 
-onChange((files) => {
-  console.log(files)
-})
+const status: Ref<RequestStatus> = ref("idle")
+
+// Handle the actual upload
+const onSubmit = async () => {
+  if (!files.value || files.value.length === 0) return
+
+  // build payload
+  const formData = new FormData()
+  for (const file of files.value) {
+    formData.append("files", file) // must match FastAPI param name
+  }
+
+  await myFetch(undefined, status)("debug/upload", {
+    method: "post",
+    body: formData,
+  })
+  if (status.value === "success") {
+    addSuccessToast("Your files have been upload successfully.")
+    reset()
+  } else {
+    addErrorToast("There has been an error while uploading your files.") // TODO: improve
+  }
+}
 </script>
