@@ -13,7 +13,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     # https://dev.to/duplys/cant-access-service-container-in-github-actions-heres-how-to-fix-it-10i1
-    container: python:3.13.2-bookworm
+    container: python:3.13.3-bookworm
     environment: fast-batteries-CI
     services:
       postgres:

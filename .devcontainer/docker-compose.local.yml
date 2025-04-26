@@ -4,7 +4,7 @@ services:
   # (because VS Code does not support single workspace for multiple containers)
   ########################################################################################
   app:
-    image: "python:3.13.2-bookworm" # Node is installed wih a container "feature" then
+    image: "python:3.13.3-bookworm" # Node is installed wih a container "feature" then
     environment:
       - PYTHONPATH=/workspaces/fast-batteries/back
       - PYTHONUNBUFFERED=1

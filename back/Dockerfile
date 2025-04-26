@@ -3,7 +3,7 @@
 ##########################################################################################
 
 # Use a specific Python version as the base image for requirements
-FROM python:3.13.2-bookworm as requirements-stage
+FROM python:3.13.3-bookworm as requirements-stage
 
 # Set the working directory inside the container
 WORKDIR /tmp
@@ -26,7 +26,7 @@ RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 ##########################################################################################
 
 # Use a clean Python base image for the final build
-FROM python:3.13.2-bookworm
+FROM python:3.13.3-bookworm
 
 # Set the working directory for the application code
 WORKDIR /code
