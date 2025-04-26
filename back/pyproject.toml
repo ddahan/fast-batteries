@@ -68,6 +68,9 @@ python = "3.13.3"
 # https://github.com/tiangolo/fastapi
 fastapi = { version = "*", extras = ["standard"] }
 
+# https://github.com/fastapi/typer
+typer = "*"
+
 # https://github.com/pydantic/pydantic
 pydantic = ">2.0"
 
@@ -141,6 +144,7 @@ boto3 = "1.37.38"
 
 # https://github.com/youtype/mypy_boto3_builder
 boto3-stubs = { extras = ["s3"], version = "1.37.38" }
+
 
 [tool.poetry.requires-plugins]
 poetry-plugin-export = "*"

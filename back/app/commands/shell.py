@@ -14,6 +14,7 @@ from collections.abc import Callable
 from datetime import timedelta
 from typing import Any
 
+import typer
 from fastapi import FastAPI
 from IPython import embed  # type: ignore
 from rich import print as rprint
@@ -28,7 +29,10 @@ from app.utils.introspection import detect_elements
 
 type ImportDict = dict[str, Any]
 
+app = typer.Typer()
 
+
+@app.command()
 def shell():
     """Run a context-aware user interactive shell (similar to Django shell_plus)."""
 
@@ -82,4 +86,4 @@ def shell():
 
 
 if __name__ == "__main__":
-    shell()
+    app()

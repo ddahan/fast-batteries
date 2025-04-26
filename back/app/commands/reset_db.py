@@ -3,6 +3,7 @@
 from datetime import timedelta
 from decimal import Decimal
 
+import typer
 from alembic import command
 from alembic.config import Config
 from loguru import logger
@@ -28,7 +29,10 @@ from app.schemas.periodic_task import PeriodicTaskIn
 from app.schemas.user import UserClassicIn
 from app.utils.filesystem import create_directory_if_not_exist, erase
 
+app = typer.Typer()
 
+
+@app.command()
 def reset_db() -> None:
     """Init or reset existing database using seed data."""
 
@@ -116,4 +120,4 @@ def seed_db(session: Session) -> None:
 
 
 if __name__ == "__main__":
-    reset_db()
+    app()
