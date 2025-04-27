@@ -118,7 +118,7 @@ services:
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     healthcheck:
-      test: ["CMD-SHELL", "wget --spider -q http://localhost"]
+      test: ["CMD-SHELL", "wget --spider -q http://localhost/misc/ping"]
       interval: 10s
       timeout: 10s
       retries: 5
