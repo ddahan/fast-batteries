@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-full items-center justify-between">
     <div class="flex items-center gap-3">
-      <UIcon v-if="icon" name="i-ph-identification-card-bold" class="size-8" />
+      <UIcon v-if="icon" :name="icon" class="size-8" />
       <h2 class="text-2xl font-semibold">{{ title }}</h2>
     </div>
     <div v-if="$slots.rightside">
