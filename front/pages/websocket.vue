@@ -23,11 +23,7 @@
       <template #footer>
         <div class="flex justify-end gap-4">
           <ButtonCancel />
-          <ButtonSubmit
-            label="Send to all users"
-            icon="i-ph-paper-plane-right-bold"
-            :status="status"
-          />
+          <UButton type="submit" label="Send to all users" icon="i-ph-paper-plane-right-bold" />
         </div>
       </template>
     </CrudCard>
@@ -38,8 +34,42 @@
 import type { FormSubmitEvent } from "#ui/types"
 import * as z from "zod"
 
-const status: Ref<RequestStatus> = ref("idle")
-const socket = ref<WebSocket | null>(null)
+import { useWebSocket } from "@vueuse/core"
+
+const { wsHostUrl, apiBase } = useRuntimeConfig().public
+const { status, data, send, open, close } = useWebSocket(
+  `${wsHostUrl}${apiBase}/ws/broadcast-message`,
+  {
+    immediate: true, // Establish the connection immediately when the composable is called
+    autoClose: true, // call close() automatically when the beforeunload event is triggered
+    autoReconnect: true, // reconnect on errors automatically
+    heartbeat: {
+      // send a small message for every given time passed to keep the connection active
+      message: "ping",
+      interval: 10000, // send a heartbeat message every 10 sec
+      pongTimeout: 3000, // wait 3 sec for the server to reply
+    },
+    onMessage: (ws, event) => {
+      // handle heartbeat server response (pong)
+
+      if (event.data == "pong") {
+        console.log("Websocket pong message received")
+        return
+      }
+
+      const data = JSON.parse(event.data)
+      useToast().add({
+        title: `New message from ${data.name}`,
+        description: data.message,
+        color: "info",
+        icon: "i-ph-envelope",
+      })
+    },
+    onError: (ws, event) => {
+      addErrorToast("WebSocket connection error")
+    },
+  }
+)
 
 const schema = z.object({
   name: z.string().min(1, "Please enter your name"),
@@ -51,54 +81,7 @@ const state = reactive({
   message: "",
 })
 
-const connectSocket = () => {
-  const { wsHostUrl, apiBase } = useRuntimeConfig().public
-  const wsUrl = process.client ? `${wsHostUrl}${apiBase}/ws/broadcast-message` : ""
-  socket.value = new WebSocket(wsUrl)
-
-  socket.value.addEventListener("message", (event) => {
-    const data = JSON.parse(event.data)
-    useToast().add({
-      title: `New message from ${data.name}`,
-      description: data.message,
-      color: "info",
-      icon: "i-ph-envelope",
-    })
-  })
-
-  socket.value.addEventListener("close", () => {
-    // Optionally reconnect or handle closure
-  })
-}
-
-onMounted(() => {
-  connectSocket()
-})
-
-onBeforeUnmount(() => {
-  socket.value?.close()
-})
-
 const onSubmit = async (event: FormSubmitEvent<z.output<typeof schema>>) => {
-  if (!socket.value || socket.value.readyState !== WebSocket.OPEN) {
-    addErrorToast("WebSocket connection is not open.")
-    return
-  }
-
-  status.value = "pending"
-
-  try {
-    socket.value.send(
-      JSON.stringify({
-        name: state.name,
-        message: state.message,
-      })
-    )
-
-    state.message = "" // clear message after sending
-    status.value = "success"
-  } catch (error) {
-    status.value = "error"
-  }
+  send(JSON.stringify(state))
 }
 </script>
