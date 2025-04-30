@@ -2,7 +2,7 @@
   <UForm :state="state" :schema="schema" @submit="onSubmit" novalidate>
     <CrudCard>
       <template #header>
-        <CrudHeader icon="i-ph-bell-bold" title="Real-time Notification" />
+        <CrudHeader icon="i-ph-arrows-left-right-bold" title="WebSocket" />
       </template>
 
       <ContainerVerticalInputs class="mx-auto">

@@ -5,6 +5,14 @@
         <UIcon class="h-8 w-8 text-(--ui-primary)" name="i-ph-battery-charging-vertical-bold" />
         <h1 class="text-xl font-bold">Fast Batteries</h1>
       </div>
+      <div class="flex gap-x-2">
+        <UButton icon="i-ph-sign-in" variant="ghost" @click="navigateTo('/upload')">
+          File Upload
+        </UButton>
+        <UButton icon="i-ph-arrows-left-right" variant="ghost" @click="navigateTo('/websocket')">
+          WebSocket
+        </UButton>
+      </div>
       <div class="flex items-center gap-x-2" v-if="userProfile">
         <p class="text-sm">
           Logged as <strong>{{ userProfile.email }}</strong>
