@@ -4,7 +4,7 @@ A modern and opinionated Full-Stack [**FastAPI**](https://fastapi.tiangolo.com/)
 
 The philosophy slightly differs from other templates, as it avoids relying on small external packages. This approach gives users full control over their code and reduces potential maintenance issues, especially with single-author, small-scale packages.
 
-*A small portion* of these features are demonstrated in [a front-end demo](https://fast-batteries.ovh) (built with Nuxt 3) showcasing CRUD management and a signup/login workflow.
+*A small portion* of these features are demonstrated in [a front-end demo](https://fast-batteries.ovh) (built with Nuxt 3) showcasing CRUD management, a signup/login workflow, upload file and websocket examples.
 
 ### 🧰 General Features
   - OAuth2 / JWT Authentication
@@ -13,6 +13,7 @@ The philosophy slightly differs from other templates, as it avoids relying on sm
   - Email templates using [MJML](https://mjml.io/), and [VS Code extension](https://marketplace.visualstudio.com/items?itemName=DanielKnights.vscode-mjml) for HTML generation
   - Background tasks with [Celery](https://docs.celeryq.dev/en/stable/)/[Beat](https://docs.celeryq.dev/en/latest/userguide/periodic-tasks.html), inclusding in-database scheduled tasks
   - S3-compatible file uploads with [MinIO](https://github.com/minio/minio)
+  - WebSocket integration using Redis Pub/Sub
   - Miscellaneous utilities, fields, schemas, functions, model mixins (timezone, timestamp, price, percentage, phone numbers, etc.)
 
 ### 🧑‍💻 Developer Experience
