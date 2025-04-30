@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     // Keys within public are also exposed client-side
     public: {
       backHostUrl: process.env.NUXT_BACK_HOST_URL,
+      wsHostUrl: process.env.NUXT_BACK_WS_URL,
       apiBase: "",
     },
   },
