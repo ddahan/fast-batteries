@@ -13,6 +13,7 @@ COPY package*.json ./
 
 # Set environment variables for install / build
 ARG NUXT_BACK_HOST_URL=${NUXT_BACK_HOST_URL}
+ARG NUXT_BACK_WS_URL=${NUXT_BACK_WS_URL}
 ENV NODE_ENV=production
 
 # Install dependencies first to leverage Docker cache if dependencies don’t change

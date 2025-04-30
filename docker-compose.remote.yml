@@ -1,6 +1,6 @@
 x-common: &common
   env_file:
-    - .env
+    - .env # It's where Dokploy env file is written
   networks:
     - dokploy-network # Connect to the shared network 'dokploy-network'
 
