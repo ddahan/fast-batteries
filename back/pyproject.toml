@@ -6,6 +6,9 @@ version = "0.1.0"
 package-mode = false
 authors = ["David Dahan <david.dahan3@gmail.com>"]
 
+[tool.poetry.group.dev.dependencies]
+pytest-asyncio = "^0.26.0"
+
 [tool.pytest.ini_options]
 addopts = "--color=yes"
 # Overrides local settings for tests.
