@@ -13,7 +13,7 @@ The philosophy slightly differs from other templates, as it avoids relying on sm
   - Email templates using [MJML](https://mjml.io/), and [VS Code extension](https://marketplace.visualstudio.com/items?itemName=DanielKnights.vscode-mjml) for HTML generation
   - Background tasks with [Celery](https://docs.celeryq.dev/en/stable/)/[Beat](https://docs.celeryq.dev/en/latest/userguide/periodic-tasks.html), inclusding in-database scheduled tasks
   - S3-compatible file uploads with [MinIO](https://github.com/minio/minio)
-  - WebSocket integration using Redis Pub/Sub
+  - WebSocket integration using Redis Pub/Sub with room management
   - Miscellaneous utilities, fields, schemas, functions, model mixins (timezone, timestamp, price, percentage, phone numbers, etc.)
 
 ### 🧑‍💻 Developer Experience

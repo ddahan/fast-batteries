@@ -37,51 +37,50 @@ import * as z from "zod"
 import { useWebSocket } from "@vueuse/core"
 
 const { wsHostUrl, apiBase } = useRuntimeConfig().public
-const { status, data, send, open, close } = useWebSocket(
-  `${wsHostUrl}${apiBase}/ws/broadcast-message`,
-  {
-    immediate: true, // Establish the connection immediately when the composable is called
-    autoClose: true, // call close() automatically when the beforeunload event is triggered
-    autoReconnect: true, // reconnect on errors automatically
-    heartbeat: {
-      // send a small message for every given time passed to keep the connection active
-      message: "ping",
-      interval: 10000, // send a heartbeat message every 10 sec
-      pongTimeout: 3000, // wait 3 sec for the server to reply
-    },
-    onMessage: (ws, event) => {
-      // handle heartbeat server response (pong)
+const { status, data, send, open, close } = useWebSocket(`${wsHostUrl}${apiBase}/ws/room/chat`, {
+  immediate: true, // Establish the connection immediately when the composable is called
+  autoClose: true, // call close() automatically when the beforeunload event is triggered
+  autoReconnect: true, // reconnect on errors automatically
+  heartbeat: {
+    // send a small message for every given time passed to keep the connection active
+    message: "ping",
+    interval: 10000, // send a heartbeat message every 10 sec
+    pongTimeout: 3000, // wait 3 sec for the server to reply
+  },
+  onMessage: (ws, event) => {
+    // handle heartbeat server response (pong)
+    if (event.data == "pong") {
+      console.log("Websocket pong message received")
+      return
+    }
 
-      if (event.data == "pong") {
-        console.log("Websocket pong message received")
-        return
-      }
-
-      const data = JSON.parse(event.data)
-      useToast().add({
-        title: `New message from ${data.name}`,
-        description: data.message,
-        color: "info",
-        icon: "i-ph-envelope",
-      })
-    },
-    onError: (ws, event) => {
-      addErrorToast("WebSocket connection error")
-    },
-  }
-)
+    const data = JSON.parse(event.data)
+    useToast().add({
+      title: `New message from ${data.name}`,
+      description: data.message,
+      color: "info",
+      icon: "i-ph-envelope",
+    })
+  },
+  onError: (ws, event) => {
+    addErrorToast("WebSocket connection error")
+  },
+})
 
 const schema = z.object({
+  room: z.string(),
   name: z.string().min(1, "Please enter your name"),
   message: z.string().min(1, "Please enter your message"),
 })
 
 const state = reactive({
+  room: "chat",
   name: "",
   message: "",
 })
 
 const onSubmit = async (event: FormSubmitEvent<z.output<typeof schema>>) => {
   send(JSON.stringify(state))
+  state.message = ""
 }
 </script>
