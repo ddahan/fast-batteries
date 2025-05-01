@@ -8,7 +8,3 @@ class RedisPubSubMessage(MySchema):
     pattern: str | None = None
     channel: str
     data: Any
-
-
-class WSBaseMessage(MySchema):
-    room: str

@@ -45,7 +45,10 @@ async def handle_websocket_connection(
                 logger.error(f"Invalid JSON message in room '{room}': {e} | raw: {raw}")
                 continue
 
-            await on_message(data, websocket)
+            try:
+                await on_message(data, websocket)
+            except Exception as e:
+                logger.exception(f"Unexpected error in on_message: {e}")
 
     except WebSocketDisconnect as e:
         logger.debug(f"WebSocket client disconnected from room '{room}': {e}")

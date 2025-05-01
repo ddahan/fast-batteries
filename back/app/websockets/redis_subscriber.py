@@ -14,7 +14,7 @@ from redis.exceptions import ConnectionError, RedisError, TimeoutError
 
 from app.core.config import get_settings
 from app.websockets.managers import ConnectionManager
-from app.websockets.schemas.base import RedisPubSubMessage
+from app.websockets.schemas.redis import RedisPubSubMessage
 
 settings = get_settings()
 

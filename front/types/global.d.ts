@@ -24,6 +24,7 @@ declare global {
   type BadgeOwner = components["schemas"]["BadgeOwner"]
   type UserPublic = components["schemas"]["UserPublic"]
   type Token = components["schemas"]["Token"]
+  type WSChatMessage = components["schemas"]["WSChatMessage"]
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
   // My custom types

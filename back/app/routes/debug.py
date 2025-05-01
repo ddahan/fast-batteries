@@ -13,6 +13,7 @@ from app.core.query_pagination import Page, Pagination
 from app.models.db_parameters import DBParametersDep
 from app.schemas.message import Message
 from app.utils.orm import model_to_dict
+from app.websockets.schemas.chat import WSChatMessage
 
 settings = get_settings()
 router = APIRouter(prefix="/debug", tags=["Debug"])
@@ -90,7 +91,9 @@ def some_method_with_celery_task_inside() -> str:  # no need to be async
     return result.status  # status will be probably be PENDING
 
 
-@router.get("/schema-includer", response_model=Pagination | Page | ErrorPayload)
+@router.get(
+    "/schema-includer", response_model=Pagination | Page | ErrorPayload | WSChatMessage
+)
 def schema_includer() -> None:
     """This is a fake endpoint to force some useful schemas to be included in openAPI"""
     return

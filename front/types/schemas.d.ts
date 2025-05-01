@@ -1033,6 +1033,18 @@ export interface components {
             /** Error Type */
             type: string;
         };
+        /** WSChatMessage */
+        WSChatMessage: {
+            /** Message */
+            message: string;
+            /** Name */
+            name: string;
+            /**
+             * Room
+             * @constant
+             */
+            room: "chat";
+        };
     };
     responses: never;
     parameters: never;
@@ -1539,7 +1551,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["Pagination"] | components["schemas"]["Page"] | components["schemas"]["ErrorPayload"];
+                    "application/json": components["schemas"]["Pagination"] | components["schemas"]["Page"] | components["schemas"]["ErrorPayload"] | components["schemas"]["WSChatMessage"];
                 };
             };
         };

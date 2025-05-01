@@ -6,6 +6,9 @@
       </template>
 
       <ContainerVerticalInputs class="mx-auto">
+        <UFormField label="Room" name="room">
+          <UInput v-model="state.room" placeholder="Tom Cook" class="w-full" disabled />
+        </UFormField>
         <UFormField label="Your name" name="name">
           <UInput v-model="state.name" placeholder="Tom Cook" class="w-full" required />
         </UFormField>
@@ -73,13 +76,14 @@ const schema = z.object({
   message: z.string().min(1, "Please enter your message"),
 })
 
-const state = reactive({
+const state: WSChatMessage = reactive({
   room: "chat",
   name: "",
   message: "",
 })
 
 const onSubmit = async (event: FormSubmitEvent<z.output<typeof schema>>) => {
+  console.log(state)
   send(JSON.stringify(state))
   state.message = ""
 }
