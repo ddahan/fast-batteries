@@ -1,3 +1,4 @@
+# pyright: reportUnknownMemberType=false
 import asyncio
 import json
 from collections.abc import Awaitable, Callable
@@ -62,7 +63,7 @@ async def redis_subscriber() -> None:
             pubsub = redis.pubsub()
             await pubsub.subscribe(REDIS_CHANNEL)
 
-            async for message in pubsub.listen():
+            async for message in pubsub.listen():  # type: ignore
                 if message.get("type") != "message":
                     continue
 
