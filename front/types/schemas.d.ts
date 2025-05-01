@@ -297,8 +297,8 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Create Upload File */
-        post: operations["create_upload_file_debug_upload_post"];
+        /** Upload Files */
+        post: operations["upload_files_debug_upload_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -457,13 +457,10 @@ export interface components {
             /** Username */
             username: string;
         };
-        /** Body_create_upload_file_debug_upload_post */
-        Body_create_upload_file_debug_upload_post: {
-            /**
-             * File
-             * Format: binary
-             */
-            file: string;
+        /** Body_upload_files_debug_upload_post */
+        Body_upload_files_debug_upload_post: {
+            /** Files */
+            files: string[];
         };
         /** ErrorPayload */
         ErrorPayload: {
@@ -858,6 +855,18 @@ export interface components {
              * @default 50
              */
             MAX_ITEMS_PER_PAGE: number;
+            /** Minio Access Key */
+            MINIO_ACCESS_KEY: string;
+            /** Minio Bucket Name */
+            MINIO_BUCKET_NAME: string;
+            /** Minio Endpoint */
+            readonly MINIO_ENDPOINT: string;
+            /** Minio Port */
+            MINIO_PORT: number;
+            /** Minio Secret Key */
+            MINIO_SECRET_KEY: string;
+            /** Minio Server */
+            MINIO_SERVER: string;
             /**
              * Phone Region Code
              * @default FR
@@ -892,15 +901,36 @@ export interface components {
              */
             REDIRECT_SLASHES: boolean;
             /**
+             * Redis Channel Prefix
+             * @default room:
+             */
+            REDIS_CHANNEL_PREFIX: string;
+            /**
              * Redis Db
              * @default 0
              */
             REDIS_DB: number;
             /**
+             * Redis Hearbeat Ping
+             * @default ping
+             */
+            REDIS_HEARBEAT_PING: string;
+            /**
+             * Redis Hearbeat Pong
+             * @default pong
+             */
+            REDIS_HEARBEAT_PONG: string;
+            /**
              * Redis Port
              * @default 6379
              */
             REDIS_PORT: number;
+            /**
+             * Redis Retry Delay
+             * Format: duration
+             * @default PT3S
+             */
+            REDIS_RETRY_DELAY: string;
             /** Redis Server */
             REDIS_SERVER: string;
             /** Redis Uri */
@@ -1467,7 +1497,9 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": Record<string, never>;
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
                 };
             };
         };
@@ -1532,7 +1564,7 @@ export interface operations {
             };
         };
     };
-    create_upload_file_debug_upload_post: {
+    upload_files_debug_upload_post: {
         parameters: {
             query?: never;
             header?: never;
@@ -1541,7 +1573,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "multipart/form-data": components["schemas"]["Body_create_upload_file_debug_upload_post"];
+                "multipart/form-data": components["schemas"]["Body_upload_files_debug_upload_post"];
             };
         };
         responses: {
@@ -1551,7 +1583,9 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": unknown;
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
                 };
             };
             /** @description Validation Error */
