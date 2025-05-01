@@ -22,11 +22,6 @@ connected_clients: set[WebSocket] = set()
 redis = Redis.from_url(settings.REDIS_URI, decode_responses=True)
 
 
-HEARTBEAT_MESSAGE = "ping"
-REDIS_CHANNEL = "chat:broadcast"  # Redis pub/sub channel name
-REDIS_RETRY_TIME_SEC = 3
-
-
 class ConnectionManager:
     def __init__(self) -> None:
         self.active_connections: set[WebSocket] = set()
@@ -61,7 +56,7 @@ async def redis_subscriber() -> None:
     while True:
         try:
             pubsub = redis.pubsub()
-            await pubsub.subscribe(REDIS_CHANNEL)
+            await pubsub.subscribe(settings.REDIS_CHANNEL)
 
             async for message in pubsub.listen():  # type: ignore
                 if message.get("type") != "message":
@@ -70,10 +65,11 @@ async def redis_subscriber() -> None:
                 await manager.broadcast(message["data"])  # type: ignore
 
         except (ConnectionError, TimeoutError, RedisError) as e:
+            retry_delay_in_sec = settings.REDIS_RETRY_DELAY.total_seconds()
             logger.error(
-                f"Redis subscriber error: {e}. Retrying in {REDIS_RETRY_TIME_SEC} seconds..."
+                f"Redis subscriber error: {e}. Retrying in {retry_delay_in_sec} seconds..."
             )
-            await asyncio.sleep(REDIS_RETRY_TIME_SEC)
+            await asyncio.sleep(retry_delay_in_sec)
 
 
 async def handle_chat_message(data: dict[str, Any], _: WebSocket) -> None:
@@ -89,7 +85,7 @@ async def handle_chat_message(data: dict[str, Any], _: WebSocket) -> None:
         return
 
     # Now, the ChatMessage can be sent to all connected clients
-    await redis.publish(REDIS_CHANNEL, chat_msg.model_dump_json())
+    await redis.publish(settings.REDIS_CHANNEL, chat_msg.model_dump_json())
 
 
 async def handle_websocket_connection(
@@ -107,9 +103,13 @@ async def handle_websocket_connection(
             raw = await websocket.receive_text()
 
             # Handle particular heartbeat message case (not JSON)
-            if raw == HEARTBEAT_MESSAGE:
-                await websocket.send_text("pong")  # local response, not broadcasted
-                logger.debug("Received ping from client, responded with pong")
+            if raw == settings.REDIS_HEARBEAT_PING:
+                # local response, not broadcasted
+                await websocket.send_text(settings.REDIS_HEARBEAT_PONG)
+                logger.debug(
+                    f"Received {settings.REDIS_HEARBEAT_PING} from client,"
+                    f"responded with {settings.REDIS_HEARBEAT_PONG}"
+                )
                 continue
 
             # Now we're sure message should be in JSON

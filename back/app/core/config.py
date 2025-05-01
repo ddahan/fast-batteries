@@ -215,6 +215,11 @@ class Settings(BaseSettings):
             )
         )
 
+    REDIS_HEARBEAT_PING: str = "ping"
+    REDIS_HEARBEAT_PONG: str = "pong"
+    REDIS_CHANNEL: str = "chat:broadcast"  # Redis pub/sub channel name
+    REDIS_RETRY_DELAY: timedelta = timedelta(seconds=3)
+
     ######################################################################################
     # Celery
     ######################################################################################
