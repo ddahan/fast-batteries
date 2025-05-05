@@ -46,6 +46,19 @@ services:
       - "8180:80"
 
   ########################################################################################
+  # CloudBeaver service
+  ########################################################################################
+  dbeaver:
+    image: "dbeaver/cloudbeaver:latest"
+    restart: unless-stopped
+    volumes:
+      - dbeaver-data:/opt/cloudbeaver/workspace
+    depends_on:
+      - pg
+    ports:
+      - "8978:8978"
+
+  ########################################################################################
   # Redis service
   ########################################################################################
   redis:
@@ -73,5 +86,6 @@ services:
 volumes:
   pg-data:
   pgadmin-data:
+  dbeaver-data:
   redis-data:
   minio-data:
