@@ -44,7 +44,7 @@ def upload_files(files: list[UploadFile]) -> dict[str, Any]:
 
     s3_client: S3Client = boto3.client(  # type: ignore
         service_name="s3",
-        endpoint_url=settings.MINIO_ENDPOINT,
+        endpoint_url=settings.MINIO_URL,
         aws_access_key_id=settings.MINIO_ACCESS_KEY,
         aws_secret_access_key=settings.MINIO_SECRET_KEY,
     )

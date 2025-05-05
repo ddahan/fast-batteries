@@ -258,16 +258,10 @@ class Settings(BaseSettings):
     # MinIO
     ######################################################################################
 
-    MINIO_SERVER: str
-    MINIO_PORT: int
+    MINIO_URL: str
     MINIO_ACCESS_KEY: str
     MINIO_SECRET_KEY: str
     MINIO_BUCKET_NAME: str
-
-    @computed_field
-    @property
-    def MINIO_ENDPOINT(self) -> str:
-        return f"http://{self.MINIO_SERVER}:{self.MINIO_PORT}"
 
     ######################################################################################
     # Model Config (used for Pydantic configuration)
