@@ -153,15 +153,6 @@ services:
       - MINIO_ROOT_PASSWORD=changeme123
       # - MINIO_SERVER_URL=https://minio.fast-batteries.ovh
       - MINIO_BROWSER_REDIRECT_URL=https://console.minio.fast-batteries.ovh
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "wget --spider -q http://localhost:9000/minio/health/live",
-        ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
     <<: *common
 
 networks:
