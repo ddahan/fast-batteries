@@ -94,8 +94,8 @@ services:
     depends_on:
       - redis
       - fastapi
-    volumes:
-      - ./back/app:/code/app # Mount the app directory for accessing tasks
+    # volumes:
+    #   - ./back/app:/code/app # Mount the app directory for accessing tasks
     healthcheck:
       test: ["CMD-SHELL", "celery --app app.confcelery.celery_app inspect ping"]
       <<: *healthcheck
