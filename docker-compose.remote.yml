@@ -5,7 +5,7 @@ x-common: &common
     - dokploy-network # Connect to the shared network 'dokploy-network'
 
 x-healthcheck: &healthcheck
-  start_period: 10s # Wait 10 seconds after container start before starting health checks
+  start_period: 5s # Wait 5 seconds after container start before starting health checks
   interval: 30s # Check every 30 seconds
   timeout: 5s # Timeout after 5 seconds
   retries: 3 # Retry up to 3 times before marking as 'unhealthy'
@@ -158,6 +158,9 @@ services:
     command: server /data --console-address ":9001"
     volumes:
       - minio-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 5s bash -c ':> /dev/tcp/127.0.0.1/9000'"]
+      <<: *healthcheck
     <<: *common
 
 networks:
