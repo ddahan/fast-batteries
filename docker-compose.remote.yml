@@ -46,7 +46,7 @@ services:
       ]
     restart: unless-stopped # Restart unless explicitly stopped or system restarted
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/health-check"]
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:8000/health-check"]
       <<: *healthcheck
     depends_on:
       pg:
