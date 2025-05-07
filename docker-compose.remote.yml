@@ -146,6 +146,12 @@ services:
   redisinsight:
     image: "redis/redisinsight:latest"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:5540/api/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    <<: *common
 
   ########################################################################################
   # MinIO service

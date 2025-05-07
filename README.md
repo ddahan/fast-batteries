@@ -35,12 +35,12 @@ The philosophy slightly differs from other templates, as it avoids relying on sm
   - ORM: [SQLAlchemy](https://www.sqlalchemy.org/) 2.0  (without [SQLModel](https://sqlmodel.tiangolo.com/))
   - Migrations: [Alembic](https://alembic.sqlalchemy.org/)
   - DBMS: [PostgreSQL](https://www.postgresql.org/)
-  - A multi-purpose [Redis](https://redis.io/) store is available too (currently used as a Celery Broker)
+  - A multi-purpose [Redis](https://redis.io/) store is available too (currently used as a Celery Broker and for websockets)
 
 ### 🚀 Deployment & Monitoring
   - Production-ready hosting  with [Docker compose](https://docs.docker.com/compose/) (the demo is deployed with [Dokploy](https://docs.dokploy.com/docs/core/docker-compose))
   - All-in-one Observability with [Pydantic Logfire](https://pydantic.dev/logfire): logs, errors, metrics, alerts, SQL introspection, and background task results. Can be used as well in local environment to debug.
-  - [pgAdmin](https://www.pgadmin.org/) for database management.
+  - Databases management tools with [pgAdmin](https://www.pgadmin.org/) and [Redis Insight](https://redis.io/insight/).
   - [Loguru](https://github.com/Delgan/loguru) for simple and clean logs.
   - CI with [Github actions](https://github.com/features/actions).
 
