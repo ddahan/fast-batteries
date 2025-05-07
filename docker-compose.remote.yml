@@ -23,7 +23,7 @@ services:
         NUXT_BACK_WS_URL: ${NUXT_BACK_WS_URL}
     command: ["node", ".output/server/index.mjs"]
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://127.0.0.1:3000/health-check"] # Check endpoint
+      test: ["CMD-SHELL", "wget --spider -q http://127.0.0.1:3000/health-check"]
       <<: *healthcheck
     <<: *common
 
@@ -46,7 +46,7 @@ services:
       ]
     restart: unless-stopped # Restart unless explicitly stopped or system restarted
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://127.0.0.1:8000/health-check"]
+      test: ["CMD-SHELL", "wget --spider -q http://127.0.0.1:8000/health-check"]
       <<: *healthcheck
     depends_on:
       pg:
@@ -94,8 +94,6 @@ services:
     depends_on:
       - redis
       - fastapi
-    # volumes:
-    #   - ./back/app:/code/app # Mount the app directory for accessing tasks
     healthcheck:
       test: ["CMD-SHELL", "celery --app app.confcelery.celery_app inspect ping"]
       <<: *healthcheck
