@@ -157,7 +157,7 @@ services:
     volumes:
       - minio-data:/data
     healthcheck:
-      test: ["CMD-SHELL", "timeout 5s bash -c ':> /dev/tcp/127.0.0.1/9000'"]
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/9000'"]
       <<: *healthcheck
     <<: *common
 
