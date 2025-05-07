@@ -94,6 +94,11 @@ services:
       - fastapi
     volumes:
       - ./back/app:/code/app # Mount the app directory for accessing tasks
+    healthcheck:
+      test: ["CMD-SHELL", "celery --app app.confcelery.celery_app inspect ping"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
     <<: *common
 
   ########################################################################################
