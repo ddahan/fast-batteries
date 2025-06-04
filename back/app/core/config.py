@@ -43,7 +43,7 @@ class Settings(BaseSettings):
     @property
     def MAIN_LOGO_URL(self) -> str:
         # would not work with FRONT_URL as an email can't display an image from localhost
-        return "https://fast-batteries.ovh/favicon/battery.png"
+        return "https://fast-batteries.w3lt.org/favicon/battery.png"
 
     ######################################################################################
     # Logging
@@ -125,7 +125,7 @@ class Settings(BaseSettings):
     @computed_field
     @property
     def EMAIL_FROM_EMAIL(self) -> str:
-        return "contact@fast-batteries.ovh"  # would not work with contact@localhost:3000
+        return "contact@fast-batteries.w3lt.org"  # would not work with contact@localhost:3000
 
     @computed_field
     @property

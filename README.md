@@ -4,7 +4,7 @@ A modern and opinionated Full-Stack [**FastAPI**](https://fastapi.tiangolo.com/)
 
 The philosophy slightly differs from other templates, as it avoids relying on small external packages. This approach gives users full control over their code and reduces potential maintenance issues, especially with single-author, small-scale packages.
 
-*A small portion* of these features are demonstrated in [a front-end demo](https://fast-batteries.ovh) (built with Nuxt 3) showcasing CRUD management, a signup/login workflow, upload file and websocket examples.
+*A small portion* of these features are demonstrated in [a front-end demo](https://fast-batteries.w3lt.org) (built with Nuxt 3) showcasing CRUD management, a signup/login workflow, upload file and websocket examples.
 
 ### 🧰 General Features
   - OAuth2 / JWT Authentication
@@ -57,7 +57,7 @@ The philosophy slightly differs from other templates, as it avoids relying on sm
 
 ## Demo
 
-You can try it [here](https://fast-batteries.ovh). E-mails will be sent for real, unless my free daily quota is reached.
+You can try it [here](https://fast-batteries.w3lt.org). E-mails will be sent for real, unless my free daily quota is reached.
 
 ## Documentation
 

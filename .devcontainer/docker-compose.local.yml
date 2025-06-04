@@ -35,7 +35,7 @@ services:
   pgadmin:
     image: "dpage/pgadmin4:9.2"
     environment:
-      - PGADMIN_DEFAULT_EMAIL=localuser@fast-batteries.ovh
+      - PGADMIN_DEFAULT_EMAIL=localuser@fast-batteries.w3lt.org
       - PGADMIN_DEFAULT_PASSWORD=localpassword
     restart: unless-stopped
     volumes:
